@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 typedef void (^ClickBlock)(UIView *sender);
-
 @interface UIView (Category)
 
 #pragma mark - position property
@@ -16,6 +15,8 @@ typedef void (^ClickBlock)(UIView *sender);
 @property (nonatomic, assign) float height;
 @property (nonatomic, assign) float xPosition;
 @property (nonatomic, assign) float yPosition;
+@property (nonatomic, assign) CGPoint origin;
+@property (nonatomic, assign) CGSize  size;
 
 
 #pragma mark - methods

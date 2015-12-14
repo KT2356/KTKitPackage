@@ -15,31 +15,21 @@
 
 @implementation UIView (Category)
 
-@dynamic height;
-@dynamic xPosition;
-@dynamic yPosition;
-
 static const void *clickBlockKey = &clickBlockKey;
 
-#pragma mark - position
+#pragma mark - width
 - (float)width {
     return self.bounds.size.width;
 }
 - (void)setWidth:(float)width {
-    if (self.autoresizesSubviews) {
-        for (NSLayoutConstraint *constrain in self.superview.constraints) {
-            if (constrain.firstItem == self && constrain.firstAttribute == NSLayoutAttributeWidth) {
+    for (NSLayoutConstraint *constrain in self.superview.constraints) {
+        if (constrain.firstItem == self && constrain.firstAttribute == NSLayoutAttributeWidth) {
                 constrain.constant = width;
-            }
         }
-        [self layoutIfNeeded];
-    } else {
-        CGRect rect = self.frame;
-        rect.size.width = width;
-        self.frame = rect;
     }
 }
 
+#pragma mark - height
 - (float)height {
     return self.bounds.size.height;
 }
@@ -49,15 +39,50 @@ static const void *clickBlockKey = &clickBlockKey;
             constrain.constant = height;
         }
     }
-    [self layoutIfNeeded];
 }
+
+#pragma mark - xPosition
 - (float)xPosition {
     return self.frame.origin.x;
 }
+- (void)setXPosition:(float)xPosition {
+    for (NSLayoutConstraint *constrain in self.superview.constraints) {
+        if (constrain.firstItem == self && constrain.firstAttribute == NSLayoutAttributeLeft) {
+            constrain.constant = xPosition;
+        }
+    }
+}
+
+#pragma mark - yPosition
 - (float)yPosition {
     return self.frame.origin.y;
 }
+- (void)setYPosition:(float)yPosition {
+    for (NSLayoutConstraint *constrain in self.superview.constraints) {
+        if (constrain.firstItem == self && constrain.firstAttribute == NSLayoutAttributeTop) {
+            constrain.constant = yPosition;
+        }
+    }
+}
 
+#pragma mark - origin
+- (CGPoint)origin{
+    return self.frame.origin;
+}
+
+- (void)setOrigin:(CGPoint)origin {
+    [self setXPosition:origin.x];
+    [self setYPosition:origin.y];
+}
+#pragma mark - size
+- (CGSize)size {
+    return self.frame.size;
+}
+
+- (void)setSize:(CGSize)size {
+    [self setWidth:size.width];
+    [self setHeight:size.height];
+}
 
 #pragma mark - public methods
 - (void)clickAction:(ClickBlock)clickBlock {

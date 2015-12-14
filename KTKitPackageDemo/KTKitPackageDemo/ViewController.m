@@ -8,11 +8,9 @@
 
 #import "ViewController.h"
 #import "UIView+Category.h"
-#import "UIView+IBspectable.h"
-#import "KTView.h"
 
 @interface ViewController ()
-@property (weak, nonatomic) IBOutlet KTView *ktView;
+@property (weak, nonatomic) IBOutlet UIView *ktView;
 @property (weak, nonatomic) IBOutlet UILabel *label;
 
 @end
@@ -21,8 +19,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIView *testView = [[UIView alloc] initWithFrame:CGRectMake(100, 100, 100, 100)];
-    [self.view addSubview:testView];
+    
+    [_ktView setOrigin:CGPointMake(0, 0)];
+    [_ktView setSize:CGSizeMake(200, 200)];
+    [_ktView layoutIfNeeded];
+    
+    NSLog(@"size: %f,%f",_ktView.width,_ktView.height);
+    NSLog(@"origin: %f,%f",_ktView.xPosition,_ktView.yPosition);
+    _ktView.backgroundColor = [UIColor greenColor];
     
     [_ktView clickAction:^(UIView *sender) {
         NSLog(@"%@",sender.backgroundColor);
@@ -31,12 +35,9 @@
     [_label clickAction:^(UIView *sender) {
         NSLog(@"label");
     }];
-    
-    _ktView.width = 60;
-    _ktView.height = 200;
-    
-    NSLog(@"width : %f",_ktView.width);
-    _ktView.backgroundColor = [UIColor greenColor];
+    [self.view clickAction:^(UIView *sender) {
+        NSLog(@"1");
+    }];
 }
 
 
