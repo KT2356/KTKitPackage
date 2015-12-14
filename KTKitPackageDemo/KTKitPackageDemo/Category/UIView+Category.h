@@ -7,12 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef void (^ClickBlock)(UIView *sender);
 
 @interface UIView (Category)
-- (float)width;
-- (float)height;
-- (float)xPosition;
-- (float)yPosition;
 
+#pragma mark - position property
+@property (nonatomic, assign) float width;
+@property (nonatomic, assign) float height;
+@property (nonatomic, assign) float xPosition;
+@property (nonatomic, assign) float yPosition;
+
+
+#pragma mark - methods
+- (void)clickAction:(ClickBlock)clickBlock;
 
 @end

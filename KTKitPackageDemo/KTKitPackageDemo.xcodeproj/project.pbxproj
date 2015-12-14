@@ -15,6 +15,8 @@
 		6824FE7F1C1E96BD0073C727 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6824FE7D1C1E96BD0073C727 /* LaunchScreen.storyboard */; };
 		6824FE8A1C1E9A450073C727 /* UIView+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 6824FE891C1E9A450073C727 /* UIView+Category.m */; };
 		6824FE901C1E9BA40073C727 /* UIView+IBspectable.m in Sources */ = {isa = PBXBuildFile; fileRef = 6824FE8F1C1E9BA40073C727 /* UIView+IBspectable.m */; };
+		68615B5C1C1EA84F006246D9 /* KTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68615B5B1C1EA84F006246D9 /* KTView.m */; };
+		68615B5F1C1EB5F9006246D9 /* KTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68615B5E1C1EB5F9006246D9 /* KTLabel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,10 @@
 		6824FE891C1E9A450073C727 /* UIView+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Category.m"; sourceTree = "<group>"; };
 		6824FE8E1C1E9BA40073C727 /* UIView+IBspectable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+IBspectable.h"; sourceTree = "<group>"; };
 		6824FE8F1C1E9BA40073C727 /* UIView+IBspectable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+IBspectable.m"; sourceTree = "<group>"; };
+		68615B5A1C1EA84F006246D9 /* KTView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTView.h; sourceTree = "<group>"; };
+		68615B5B1C1EA84F006246D9 /* KTView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTView.m; sourceTree = "<group>"; };
+		68615B5D1C1EB5F9006246D9 /* KTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTLabel.h; sourceTree = "<group>"; };
+		68615B5E1C1EB5F9006246D9 /* KTLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTLabel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +70,7 @@
 		6824FE6E1C1E96BD0073C727 /* KTKitPackageDemo */ = {
 			isa = PBXGroup;
 			children = (
+				68615B591C1EA827006246D9 /* BasicView */,
 				6824FE861C1E96CD0073C727 /* Category */,
 				6824FE871C1E96F50073C727 /* IBInspectable */,
 				6824FE6F1C1E96BD0073C727 /* Supporting Files */,
@@ -105,6 +112,17 @@
 			path = IBInspectable;
 			sourceTree = "<group>";
 		};
+		68615B591C1EA827006246D9 /* BasicView */ = {
+			isa = PBXGroup;
+			children = (
+				68615B5A1C1EA84F006246D9 /* KTView.h */,
+				68615B5B1C1EA84F006246D9 /* KTView.m */,
+				68615B5D1C1EB5F9006246D9 /* KTLabel.h */,
+				68615B5E1C1EB5F9006246D9 /* KTLabel.m */,
+			);
+			path = BasicView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -139,7 +157,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 6824FE671C1E96BD0073C727 /* Build configuration list for PBXProject "ktkitpackagedemo" */;
+			buildConfigurationList = 6824FE671C1E96BD0073C727 /* Build configuration list for PBXProject "KTKitPackageDemo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -179,7 +197,9 @@
 				6824FE741C1E96BD0073C727 /* AppDelegate.m in Sources */,
 				6824FE8A1C1E9A450073C727 /* UIView+Category.m in Sources */,
 				6824FE711C1E96BD0073C727 /* main.m in Sources */,
+				68615B5F1C1EB5F9006246D9 /* KTLabel.m in Sources */,
 				6824FE901C1E9BA40073C727 /* UIView+IBspectable.m in Sources */,
+				68615B5C1C1EA84F006246D9 /* KTView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,7 +332,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6824FE671C1E96BD0073C727 /* Build configuration list for PBXProject "ktkitpackagedemo" */ = {
+		6824FE671C1E96BD0073C727 /* Build configuration list for PBXProject "KTKitPackageDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6824FE811C1E96BD0073C727 /* Debug */,
