@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface UIView (IBspectable)
-@property (assign, nonatomic) IBInspectable float cornerRadius;
-@property (assign, nonatomic) IBInspectable float borderWidth;
-@property (strong, nonatomic) IBInspectable UIColor *borderColor;
-@property (assign, nonatomic) IBInspectable BOOL  masksToBounds;
+@property (assign, nonatomic) IBInspectable float    cornerRadius;
+@property (assign, nonatomic) IBInspectable float    borderWidth;
+@property (strong, nonatomic) IBInspectable UIColor  *borderColor;
+@property (strong, nonatomic) IBInspectable NSString *backHexColor;
+@property (strong, nonatomic) IBInspectable NSString *textHexColor;
+@property (assign, nonatomic) IBInspectable float    textSize;
+@property (assign, nonatomic) IBInspectable BOOL     masksToBounds;
 @end

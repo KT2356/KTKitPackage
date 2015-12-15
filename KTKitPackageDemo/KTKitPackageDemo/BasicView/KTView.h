@@ -11,5 +11,4 @@
 
 IB_DESIGNABLE
 @interface KTView : UIView
-
 @end

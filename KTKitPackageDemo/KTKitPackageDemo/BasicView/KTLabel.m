@@ -7,7 +7,5 @@
 //
 
 #import "KTLabel.h"
-
 @implementation KTLabel
-
 @end

@@ -1,14 +1,15 @@
 //
-//  KTLabel.h
+//  KTButton.h
 //  KTKitPackageDemo
 //
-//  Created by KT on 15/12/14.
+//  Created by KT on 15/12/15.
 //  Copyright © 2015年 KT. All rights reserved.
 //
 
-#import "KTView.h"
+#import <UIKit/UIKit.h>
 #import "UIView+IBspectable.h"
 
 IB_DESIGNABLE
-@interface KTLabel : UILabel
+@interface KTButton : UIButton
+
 @end

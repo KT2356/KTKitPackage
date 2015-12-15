@@ -20,9 +20,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [_ktView setOrigin:CGPointMake(0, 0)];
-    [_ktView setSize:CGSizeMake(200, 200)];
-    [_ktView layoutIfNeeded];
+    
+    [_ktView setSize:CGSizeMake(200, 200) withDuration:2];
+    [_ktView setCenterPoint:CGPointMake(100, 100) withDuration:1];
+    
+
+
     
     NSLog(@"size: %f,%f",_ktView.width,_ktView.height);
     NSLog(@"origin: %f,%f",_ktView.xPosition,_ktView.yPosition);
@@ -33,7 +36,7 @@
     }];
     
     [_label clickAction:^(UIView *sender) {
-        NSLog(@"label");
+        NSLog(@"%@",((UILabel *)sender).text);
     }];
     [self.view clickAction:^(UIView *sender) {
         NSLog(@"1");

@@ -15,11 +15,28 @@ typedef void (^ClickBlock)(UIView *sender);
 @property (nonatomic, assign) float height;
 @property (nonatomic, assign) float xPosition;
 @property (nonatomic, assign) float yPosition;
+@property (nonatomic, assign) float centerX;
+@property (nonatomic, assign) float centerY;
+@property (nonatomic, assign) CGPoint centerPoint;
 @property (nonatomic, assign) CGPoint origin;
 @property (nonatomic, assign) CGSize  size;
 
 
 #pragma mark - methods
 - (void)clickAction:(ClickBlock)clickBlock;
+
+
+#pragma mark - animation
+- (void)setSize:(CGSize)size withDuration:(NSTimeInterval)lastTime;
+- (void)setWidth:(float)width withDuration:(NSTimeInterval)lastTime;
+- (void)setHeight:(float)height withDuration:(NSTimeInterval)lastTime;
+
+- (void)setOrigin:(CGPoint)origin withDuration:(NSTimeInterval)lastTime;
+- (void)setXPosition:(float)xPosition withDuration:(NSTimeInterval)lastTime;
+- (void)setYPosition:(float)yPosition withDuration:(NSTimeInterval)lastTime;
+
+- (void)setCenterPoint:(CGPoint)centerPoint withDuration:(NSTimeInterval)lastTime;
+- (void)setCenterY:(float)centerY withDuration:(NSTimeInterval)lastTime;
+- (void)setCenterX:(float)centerX withDuration:(NSTimeInterval)lastTime;
 
 @end
