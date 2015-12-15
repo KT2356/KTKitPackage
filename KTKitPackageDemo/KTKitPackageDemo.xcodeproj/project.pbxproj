@@ -19,6 +19,8 @@
 		68615B5F1C1EB5F9006246D9 /* KTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68615B5E1C1EB5F9006246D9 /* KTLabel.m */; };
 		68615B621C1FB5B0006246D9 /* KTTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 68615B611C1FB5B0006246D9 /* KTTextField.m */; };
 		68615B651C1FB6B7006246D9 /* KTButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 68615B641C1FB6B7006246D9 /* KTButton.m */; };
+		686D0C901C1FE413009CF128 /* KTImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 686D0C8F1C1FE413009CF128 /* KTImageView.m */; };
+		686D0C931C1FE42D009CF128 /* UIImageView+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 686D0C921C1FE42D009CF128 /* UIImageView+Category.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,10 @@
 		68615B611C1FB5B0006246D9 /* KTTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTTextField.m; sourceTree = "<group>"; };
 		68615B631C1FB6B7006246D9 /* KTButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTButton.h; sourceTree = "<group>"; };
 		68615B641C1FB6B7006246D9 /* KTButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTButton.m; sourceTree = "<group>"; };
+		686D0C8E1C1FE413009CF128 /* KTImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTImageView.h; sourceTree = "<group>"; };
+		686D0C8F1C1FE413009CF128 /* KTImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTImageView.m; sourceTree = "<group>"; };
+		686D0C911C1FE42D009CF128 /* UIImageView+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Category.h"; sourceTree = "<group>"; };
+		686D0C921C1FE42D009CF128 /* UIImageView+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Category.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +111,8 @@
 			children = (
 				6824FE881C1E9A450073C727 /* UIView+Category.h */,
 				6824FE891C1E9A450073C727 /* UIView+Category.m */,
+				686D0C911C1FE42D009CF128 /* UIImageView+Category.h */,
+				686D0C921C1FE42D009CF128 /* UIImageView+Category.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -129,6 +137,8 @@
 				68615B611C1FB5B0006246D9 /* KTTextField.m */,
 				68615B631C1FB6B7006246D9 /* KTButton.h */,
 				68615B641C1FB6B7006246D9 /* KTButton.m */,
+				686D0C8E1C1FE413009CF128 /* KTImageView.h */,
+				686D0C8F1C1FE413009CF128 /* KTImageView.m */,
 			);
 			path = BasicView;
 			sourceTree = "<group>";
@@ -207,11 +217,13 @@
 				6824FE771C1E96BD0073C727 /* ViewController.m in Sources */,
 				6824FE741C1E96BD0073C727 /* AppDelegate.m in Sources */,
 				6824FE8A1C1E9A450073C727 /* UIView+Category.m in Sources */,
+				686D0C931C1FE42D009CF128 /* UIImageView+Category.m in Sources */,
 				68615B651C1FB6B7006246D9 /* KTButton.m in Sources */,
 				6824FE711C1E96BD0073C727 /* main.m in Sources */,
 				68615B5F1C1EB5F9006246D9 /* KTLabel.m in Sources */,
 				6824FE901C1E9BA40073C727 /* UIView+IBspectable.m in Sources */,
 				68615B5C1C1EA84F006246D9 /* KTView.m in Sources */,
+				686D0C901C1FE413009CF128 /* KTImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

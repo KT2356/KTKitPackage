@@ -8,10 +8,12 @@
 
 #import "ViewController.h"
 #import "UIView+Category.h"
+#import "UIImageView+Category.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIView *ktView;
 @property (weak, nonatomic) IBOutlet UILabel *label;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end
 
@@ -41,6 +43,19 @@
     [self.view clickAction:^(UIView *sender) {
         NSLog(@"1");
     }];
+    
+    [_imageView clickAction:^(UIView *sender) {
+        NSLog(@"image click");
+    }];
+    
+    [_imageView setPlaceholderImg:[UIImage imageNamed:@"a"]
+                   imageURLString:@"http://down1.cnmo.com/app/a129/fangzi00.jpg"
+     completionHandler:^{
+         NSLog(@"finished");
+     }];
+    [_imageView deleteImageCache];
+    
+    //[_imageView replaceCacheImage:[UIImage imageNamed:@"a"]];
 }
 
 
