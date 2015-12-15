@@ -9,11 +9,13 @@
 #import "ViewController.h"
 #import "UIView+Category.h"
 #import "UIImageView+Category.h"
+#import "UIButton+Category.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIView *ktView;
 @property (weak, nonatomic) IBOutlet UILabel *label;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIButton *btn;
 
 @end
 
@@ -22,12 +24,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    [_ktView setSize:CGSizeMake(200, 200) withDuration:2];
-    [_ktView setCenterPoint:CGPointMake(100, 100) withDuration:1];
-    
-
-
+    [_ktView setOrigin:CGPointMake(0, 0) withDuration:1];
+    [_ktView setSize:CGSizeMake(100, 100) withDuration:2];
     
     NSLog(@"size: %f,%f",_ktView.width,_ktView.height);
     NSLog(@"origin: %f,%f",_ktView.xPosition,_ktView.yPosition);
@@ -56,6 +54,11 @@
     [_imageView deleteImageCache];
     
     //[_imageView replaceCacheImage:[UIImage imageNamed:@"a"]];
+    
+    
+    [_btn addAction:^(UIButton *sender) {
+        NSLog(@"action11");
+    }];
 }
 
 

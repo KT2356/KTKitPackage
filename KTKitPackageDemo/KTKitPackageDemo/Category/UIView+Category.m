@@ -9,7 +9,7 @@
 #import "UIView+Category.h"
 #import <objc/runtime.h>
 
-@interface UIView ()
+@interface UIView ()<UIGestureRecognizerDelegate>
 @property (nonatomic, copy) ClickBlock clickBlock;
 @end;
 
@@ -184,15 +184,22 @@ static const void *clickBlockKey = &clickBlockKey;
     self.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidClick)];
     tapped.cancelsTouchesInView = NO;
+    tapped.delegate             = self;
     [self addGestureRecognizer:tapped];
-    self.clickBlock = clickBlock;
+    self.clickBlock             = clickBlock;
 }
 
 #pragma mark - private methods
 - (void)viewDidClick {
     self.clickBlock(self);
 }
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if ([touch.view isKindOfClass:[UIControl class]]){
+        return NO;
+    }
+    return YES;
 
+}
 
 #pragma mark - setter/getter
 - (ClickBlock)clickBlock {
