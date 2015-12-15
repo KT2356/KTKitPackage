@@ -15,6 +15,7 @@
 @dynamic masksToBounds;
 @dynamic backHexColor;
 @dynamic textHexColor;
+@dynamic textSize;
 
 #pragma mark - IBInspectable
 - (void)setCornerRadius:(float)cornerRadius{

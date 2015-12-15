@@ -16,7 +16,6 @@
 @implementation UIView (Category)
 static const void *clickBlockKey = &clickBlockKey;
 
-
 #pragma mark - width
 - (float)width {
     return self.bounds.size.width;

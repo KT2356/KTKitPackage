@@ -86,8 +86,9 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="backHexColor" value="111111"/>
                                     <userDefinedRuntimeAttribute type="string" keyPath="textHexColor" value="998564"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="textSize">
-                                        <real key="value" value="10"/>
+                                        <real key="value" value="14"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </button>
                         </subviews>
