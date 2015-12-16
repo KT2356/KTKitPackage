@@ -39,4 +39,7 @@ typedef void (^ClickBlock)(UIView *sender);
 - (void)setCenterY:(float)centerY withDuration:(NSTimeInterval)lastTime;
 - (void)setCenterX:(float)centerX withDuration:(NSTimeInterval)lastTime;
 
+#pragma mark - find ViewController
+- (UIViewController*)superViewController;
+- (UINavigationController *)superNavigationController;
 @end

@@ -24,6 +24,8 @@
 		6891BE711C200E4E0092D7D8 /* UIButton+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 6891BE701C200E4E0092D7D8 /* UIButton+Category.m */; };
 		68F5B2191C20F0D300233560 /* UIAlertController+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F5B2181C20F0D300233560 /* UIAlertController+Category.m */; };
 		68F5B21C1C21203B00233560 /* UITextField+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F5B21B1C21203B00233560 /* UITextField+Category.m */; };
+		68F5B2221C21433A00233560 /* NSString+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F5B2211C21433A00233560 /* NSString+Category.m */; };
+		68F5B2251C214FD900233560 /* UIColor+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F5B2241C214FD900233560 /* UIColor+Category.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +61,10 @@
 		68F5B2181C20F0D300233560 /* UIAlertController+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+Category.m"; sourceTree = "<group>"; };
 		68F5B21A1C21203B00233560 /* UITextField+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Category.h"; sourceTree = "<group>"; };
 		68F5B21B1C21203B00233560 /* UITextField+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Category.m"; sourceTree = "<group>"; };
+		68F5B2201C21433A00233560 /* NSString+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Category.h"; sourceTree = "<group>"; };
+		68F5B2211C21433A00233560 /* NSString+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Category.m"; sourceTree = "<group>"; };
+		68F5B2231C214FD900233560 /* UIColor+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Category.h"; sourceTree = "<group>"; };
+		68F5B2241C214FD900233560 /* UIColor+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Category.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +124,10 @@
 		6824FE861C1E96CD0073C727 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				68F5B2201C21433A00233560 /* NSString+Category.h */,
+				68F5B2211C21433A00233560 /* NSString+Category.m */,
+				68F5B2231C214FD900233560 /* UIColor+Category.h */,
+				68F5B2241C214FD900233560 /* UIColor+Category.m */,
 				6824FE881C1E9A450073C727 /* UIView+Category.h */,
 				6824FE891C1E9A450073C727 /* UIView+Category.m */,
 				686D0C911C1FE42D009CF128 /* UIImageView+Category.h */,
@@ -231,6 +241,7 @@
 				68615B621C1FB5B0006246D9 /* KTTextField.m in Sources */,
 				6824FE771C1E96BD0073C727 /* ViewController.m in Sources */,
 				6824FE741C1E96BD0073C727 /* AppDelegate.m in Sources */,
+				68F5B2251C214FD900233560 /* UIColor+Category.m in Sources */,
 				6824FE8A1C1E9A450073C727 /* UIView+Category.m in Sources */,
 				686D0C931C1FE42D009CF128 /* UIImageView+Category.m in Sources */,
 				68F5B21C1C21203B00233560 /* UITextField+Category.m in Sources */,
@@ -241,6 +252,7 @@
 				6824FE901C1E9BA40073C727 /* UIView+IBspectable.m in Sources */,
 				6891BE711C200E4E0092D7D8 /* UIButton+Category.m in Sources */,
 				68615B5C1C1EA84F006246D9 /* KTView.m in Sources */,
+				68F5B2221C21433A00233560 /* NSString+Category.m in Sources */,
 				686D0C901C1FE413009CF128 /* KTImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -192,13 +192,19 @@ static const void *clickBlockKey = &clickBlockKey;
 #pragma mark - private methods
 - (void)viewDidClick {
     self.clickBlock(self);
+    //点击事件时，取消super VC子视图的 FirstResponse
+    UIViewController *superVC = [self superViewController];
+    for (UIView *view in superVC.view.subviews) {
+        if ([view respondsToSelector:@selector(isFirstResponder)]) {
+            [view resignFirstResponder];
+        }
+    }
 }
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     if ([touch.view isKindOfClass:[UIControl class]]){
         return NO;
     }
     return YES;
-
 }
 
 #pragma mark - setter/getter
@@ -209,4 +215,29 @@ static const void *clickBlockKey = &clickBlockKey;
 - (void)setClickBlock:(ClickBlock)clickBlock{
     objc_setAssociatedObject(self, clickBlockKey, clickBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
+
+#pragma mark - findViewController
+- (UIViewController*)superViewController {
+    UIResponder *responder = [self nextResponder];
+    while (responder) {
+        if ([responder isKindOfClass:[UIViewController class]]) {
+            return (UIViewController *)responder;
+        }
+        responder = [responder nextResponder];
+    }
+    return nil;
+}
+
+#pragma mark - findViewController
+- (UINavigationController *)superNavigationController {
+    UIResponder *responder = [self nextResponder];
+    while (responder) {
+        if ([responder isKindOfClass:[UINavigationController class]]) {
+            return (UINavigationController *)responder;
+        }
+        responder = [responder nextResponder];
+    }
+    return nil;
+}
+
 @end
