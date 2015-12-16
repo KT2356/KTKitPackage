@@ -56,7 +56,7 @@
     
     //[_imageView replaceCacheImage:[UIImage imageNamed:@"a"]];
     
-    UIAlertController *alertsheet = [[UIAlertController alloc] initActionSheetWithTitle:@"aaa" ActionTitleArray:@[@"11",@"22"] CancelHandler:^{
+    UIAlertController *alertsheet = [UIAlertController initActionSheetWithTitle:@"aaa" ActionTitleArray:@[@"11",@"22"] CancelHandler:^{
             NSLog(@"cancel");
         }
         ActionHandler:^(int index) {
@@ -68,11 +68,11 @@
           }
     ];
     
-    UIAlertController *alertSingle = [[UIAlertController alloc] initSingleAlertWithTitle:@"提醒" withMessage:@" tdsafsaf" actionHandler:^{
+    UIAlertController *alertSingle = [UIAlertController initSingleAlertWithTitle:@"提醒" withMessage:@" tdsafsaf" actionHandler:^{
         NSLog(@"ok");
     }];
     
-    UIAlertController *alert = [[UIAlertController alloc] initAlertWithTitle:@"确认删除"
+    UIAlertController *alert = [UIAlertController initAlertWithTitle:@"确认删除"
       cancelHandler:^{
         NSLog(@"cancel");
     } OKHandler:^{
@@ -81,7 +81,7 @@
     
     
     [_btn addAction:^(UIButton *sender) {
-        [self presentViewController:alertsheet animated:YES completion:nil];
+        [self presentViewController:alert animated:YES completion:nil];
     }];
 }
 

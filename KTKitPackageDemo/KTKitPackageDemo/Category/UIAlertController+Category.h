@@ -11,27 +11,27 @@
 @interface UIAlertController (Category)
 
 #pragma mark - ActionSheet
-- (instancetype)initActionSheetWithTitle:(NSString *)title
++ (instancetype)initActionSheetWithTitle:(NSString *)title
                         ActionTitleArray:(NSArray *)actionTitleArray
                            CancelHandler:(void(^)())cancelHandler
                            ActionHandler:(void(^)(int index))actionHander;
 
 #pragma mark - AlertView - simple
-- (instancetype)initSingleAlertWithTitle:(NSString *)title
++ (instancetype)initSingleAlertWithTitle:(NSString *)title
                              withMessage:(NSString *)message
                            actionHandler:(void (^)())handler;
 
-- (instancetype)initSingleAlertWithTitle:(NSString *)title
++ (instancetype)initSingleAlertWithTitle:(NSString *)title
                            actionHandler:(void (^)())handler;
 
 
 #pragma mark - AlertView
-- (instancetype)initAlertWithTitle:(NSString *)title
++ (instancetype)initAlertWithTitle:(NSString *)title
                        withMessage:(NSString *)message
                      cancelHandler:(void (^)())cancelHandler
                          OKHandler:(void (^)())okHandler;
 
-- (instancetype)initAlertWithTitle:(NSString *)title
++ (instancetype)initAlertWithTitle:(NSString *)title
                      cancelHandler:(void (^)())cancelHandler
                          OKHandler:(void (^)())okHandler;
 @end

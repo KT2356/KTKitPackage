@@ -10,7 +10,7 @@
 
 @implementation UIAlertController (Category)
 
-- (instancetype)initActionSheetWithTitle:(NSString *)title
++ (instancetype)initActionSheetWithTitle:(NSString *)title
                         ActionTitleArray:(NSArray *)actionTitleArray
                            CancelHandler:(void(^)())cancelHandler
                            ActionHandler:(void(^)(int index))actionHander
@@ -37,7 +37,7 @@
     return alertVC;
 }
 
-- (instancetype)initSingleAlertWithTitle:(NSString *)title
++ (instancetype)initSingleAlertWithTitle:(NSString *)title
                              withMessage:(NSString *)message
                            actionHandler:(void (^)())handler
 {
@@ -50,15 +50,15 @@
     return alertVC;
 }
 
-- (instancetype)initSingleAlertWithTitle:(NSString *)title
++ (instancetype)initSingleAlertWithTitle:(NSString *)title
                            actionHandler:(void (^)())handler
 {
-    return [self initSingleAlertWithTitle:title
+    return [UIAlertController initSingleAlertWithTitle:title
                               withMessage:nil
                             actionHandler:handler];
 }
 
-- (instancetype)initAlertWithTitle:(NSString *)title
++ (instancetype)initAlertWithTitle:(NSString *)title
                        withMessage:(NSString *)message
                      cancelHandler:(void (^)())cancelHandler
                          OKHandler:(void (^)())okHandler
@@ -77,15 +77,14 @@
     return alertVC;
 }
 
-- (instancetype)initAlertWithTitle:(NSString *)title
++ (instancetype)initAlertWithTitle:(NSString *)title
                      cancelHandler:(void (^)())cancelHandler
                          OKHandler:(void (^)())okHandler
 {
-   return  [self initAlertWithTitle:title
+   return  [UIAlertController initAlertWithTitle:title
                  withMessage:nil
                cancelHandler:cancelHandler
                    OKHandler:okHandler];
 }
-
 
 @end
