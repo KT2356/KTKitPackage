@@ -219,6 +219,7 @@ static const void *clickBlockKey = &clickBlockKey;
 #pragma mark - findViewController
 - (UIViewController*)superViewController {
     UIResponder *responder = [self nextResponder];
+    NSLog(@"self : %@---response %@",self,responder);
     while (responder) {
         if ([responder isKindOfClass:[UIViewController class]]) {
             return (UIViewController *)responder;

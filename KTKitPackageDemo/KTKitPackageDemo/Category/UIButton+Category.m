@@ -26,7 +26,6 @@ static const void *ktButtonActionKey = &ktButtonActionKey;
     self.actionHander = actionHander;
 }
 
-
 - (void)executeAction {
     if (self.actionHander) {
         self.actionHander(self);
