@@ -19,7 +19,9 @@
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消"
                                                                style:UIAlertActionStyleCancel
                                                              handler:^(UIAlertAction * _Nonnull action) {
+                                                                 if (cancelHandler) {
                                                                     cancelHandler();
+                                                                 }
                                                              }
                                    ];
     [alertVC addAction:cancelAction];
@@ -28,7 +30,9 @@
             UIAlertAction *alertAction = [UIAlertAction actionWithTitle:actionTitleArray[i]
                                                                   style:UIAlertActionStyleDefault
                                                                 handler:^(UIAlertAction * _Nonnull action) {
-                                                                    actionHander(i);
+                                                                    if (actionHander) {
+                                                                        actionHander(i);
+                                                                    }
                                                                 }
                                           ];
             [alertVC addAction:alertAction];
@@ -43,7 +47,9 @@
 {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        if (handler) {
             handler();
+        }
     }];
     [alertVC addAction:cancelAction];
 
@@ -65,11 +71,15 @@
 {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        if (cancelHandler) {
             cancelHandler();
+        }
     }];
         
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if (okHandler) {
             okHandler();
+        }
     }];
         
     [alertVC addAction:cancelAction];

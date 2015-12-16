@@ -7,6 +7,7 @@
 //
 
 #import "UIButton+Category.h"
+#import "UIView+Category.h"
 #import <objc/runtime.h>
 
 @interface UIButton ()
@@ -27,6 +28,8 @@ static const void *ktButtonActionKey = &ktButtonActionKey;
 }
 
 - (void)executeAction {
+    //点击button 取消super VC子视图的 FirstResponse
+    [self resignFirstResponseInViewController];
     if (self.actionHander) {
         self.actionHander(self);
     }

@@ -32,12 +32,16 @@ static const void *KTtextChangedHandler = &KTtextChangedHandler;
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self resignFirstResponder];
-    self.returnHandler(textField.text);
+    if (self.returnHandler) {
+        self.returnHandler(textField.text);
+    }
     return YES;
 }
 
 - (void)textFieldDidChange:(UITextField *)sender {
-    self.textChangedHandler(sender.text);
+    if (self.textChangedHandler) {
+        self.textChangedHandler(sender.text);
+    }
 }
 
 

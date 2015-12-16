@@ -42,4 +42,6 @@ typedef void (^ClickBlock)(UIView *sender);
 #pragma mark - find ViewController
 - (UIViewController*)superViewController;
 - (UINavigationController *)superNavigationController;
+
+- (void)resignFirstResponseInViewController;
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "UISlider+Category.h"
+#import "UIView+Category.h"
 #import <objc/runtime.h>
 
 @interface UISlider ()
@@ -26,8 +27,11 @@ static const void *KTSliderPastValueKey = &KTSliderPastValueKey;
 
 #pragma mark - private methods
 - (void)sliderValueDidChanged {
+    [self resignFirstResponseInViewController];
     if (self.pastValue.floatValue != self.value) {
-        self.sliderValueChanged(self.value);
+        if (self.sliderValueChanged) {
+            self.sliderValueChanged(self.value);
+        }
         self.pastValue = [NSNumber numberWithFloat:self.value];
     }
 }
