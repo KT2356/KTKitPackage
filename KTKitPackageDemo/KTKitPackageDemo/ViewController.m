@@ -10,6 +10,7 @@
 #import "UIView+Category.h"
 #import "UIImageView+Category.h"
 #import "UIButton+Category.h"
+#import "UIAlertController+Category.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIView *ktView;
@@ -55,9 +56,31 @@
     
     //[_imageView replaceCacheImage:[UIImage imageNamed:@"a"]];
     
+    UIAlertController *alertsheet = [[UIAlertController alloc] initActionSheetWithTitle:@"aaa" ActionTitleArray:@[@"11",@"22"] CancelHandler:^{
+            NSLog(@"cancel");
+        }
+        ActionHandler:^(int index) {
+            if (index == 0) {
+                NSLog(@"0 click");
+            } else if (index == 1) {
+                 NSLog(@"1 click");
+            }
+          }
+    ];
+    
+//    UIAlertController *alertSingle = [[UIAlertController alloc] initSingleAlertWithTitle:@"提醒" withMessage:@" tdsafsaf" actionHandler:^{
+//        NSLog(@"ok");
+//    }];
+//    
+//    UIAlertController *alert = [[UIAlertController alloc] initAlertWithTitle:@"1" withMessage:@"2" cancelHandler:^{
+//        NSLog(@"cancel");
+//    } OKHandler:^{
+//        NSLog(@"ok");
+//    }];
+    
     
     [_btn addAction:^(UIButton *sender) {
-        NSLog(@"action11");
+        [self presentViewController:alertsheet animated:YES completion:nil];
     }];
 }
 
