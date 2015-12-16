@@ -39,19 +39,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1111111" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EeH-Ts-U05" customClass="KTTextField">
-                                <rect key="frame" x="98" y="49" width="97" height="30"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="textHexColor" value="451289"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="backHexColor" value="784512"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="textSize">
-                                        <real key="value" value="555"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7aM-Bw-hrl" customClass="KTView">
                                 <rect key="frame" x="187" y="186" width="120" height="64"/>
                                 <animations/>
@@ -100,6 +87,25 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B72-z8-SEo">
+                                <rect key="frame" x="40" y="154" width="97" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EeH-Ts-U05" customClass="KTTextField">
+                                <rect key="frame" x="20" y="203" width="155" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="textHexColor" value="451289"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="backHexColor" value="784512"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="textSize">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -110,6 +116,7 @@
                         <outlet property="imageView" destination="bUQ-Vo-XUh" id="dxp-fp-oSF"/>
                         <outlet property="ktView" destination="7aM-Bw-hrl" id="p8t-0a-Ngs"/>
                         <outlet property="label" destination="yRu-wv-jcH" id="0yu-zC-ZTo"/>
+                        <outlet property="textField" destination="EeH-Ts-U05" id="BtZ-Qt-LfF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AFW-YO-LuD" userLabel="First Responder" sceneMemberID="firstResponder"/>

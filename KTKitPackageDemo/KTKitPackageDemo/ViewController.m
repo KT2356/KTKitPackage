@@ -11,12 +11,14 @@
 #import "UIImageView+Category.h"
 #import "UIButton+Category.h"
 #import "UIAlertController+Category.h"
+#import "UITextField+Category.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIView *ktView;
 @property (weak, nonatomic) IBOutlet UILabel *label;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIButton *btn;
+@property (weak, nonatomic) IBOutlet UITextField *textField;
 
 @end
 
@@ -56,32 +58,40 @@
     
     //[_imageView replaceCacheImage:[UIImage imageNamed:@"a"]];
     
-    UIAlertController *alertsheet = [UIAlertController initActionSheetWithTitle:@"aaa" ActionTitleArray:@[@"11",@"22"] CancelHandler:^{
-            NSLog(@"cancel");
-        }
-        ActionHandler:^(int index) {
-            if (index == 0) {
-                NSLog(@"0 click");
-            } else if (index == 1) {
-                 NSLog(@"1 click");
-            }
-          }
-    ];
+//    UIAlertController *alertsheet = [UIAlertController initActionSheetWithTitle:@"aaa" ActionTitleArray:@[@"11",@"22"] CancelHandler:^{
+//            NSLog(@"cancel");
+//        }
+//        ActionHandler:^(int index) {
+//            if (index == 0) {
+//                NSLog(@"0 click");
+//            } else if (index == 1) {
+//                 NSLog(@"1 click");
+//            }
+//          }
+//    ];
     
-    UIAlertController *alertSingle = [UIAlertController initSingleAlertWithTitle:@"提醒" withMessage:@" tdsafsaf" actionHandler:^{
+    UIAlertController *alertSingle = [UIAlertController initSingleAlertWithTitle:@"提醒"  actionHandler:^{
         NSLog(@"ok");
     }];
     
-    UIAlertController *alert = [UIAlertController initAlertWithTitle:@"确认删除"
-      cancelHandler:^{
-        NSLog(@"cancel");
-    } OKHandler:^{
-        NSLog(@"ok");
-    }];
+//    UIAlertController *alert = [UIAlertController initAlertWithTitle:@"确认删除"
+//      cancelHandler:^{
+//        NSLog(@"cancel");
+//    } OKHandler:^{
+//        NSLog(@"ok");
+//    }];
     
     
     [_btn addAction:^(UIButton *sender) {
-        [self presentViewController:alert animated:YES completion:nil];
+        [self presentViewController:alertSingle animated:YES completion:nil];
+    }];
+    
+    [_textField returnHandler:^(NSString *textString) {
+        NSLog(@"return : %@",textString);
+    }];
+    
+    [_textField textChangeHandler:^(NSString *textString) {
+        NSLog(@"--%@",textString);
     }];
 }
 
