@@ -23,14 +23,16 @@
                                                              }
                                    ];
     [alertVC addAction:cancelAction];
-    for (int i = 0; i < actionTitleArray.count; i++) {
-        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:actionTitleArray[i]
-                                                             style:UIAlertActionStyleDefault
-                                                           handler:^(UIAlertAction * _Nonnull action) {
-                                                               actionHander(i);
-                                                           }
-                                      ];
-        [alertVC addAction:alertAction];
+    if (actionTitleArray && actionTitleArray.count > 1) {
+        for (int i = 0; i < actionTitleArray.count; i++) {
+            UIAlertAction *alertAction = [UIAlertAction actionWithTitle:actionTitleArray[i]
+                                                                  style:UIAlertActionStyleDefault
+                                                                handler:^(UIAlertAction * _Nonnull action) {
+                                                                    actionHander(i);
+                                                                }
+                                          ];
+            [alertVC addAction:alertAction];
+        }
     }
     return alertVC;
 }
@@ -46,6 +48,14 @@
     [alertVC addAction:cancelAction];
 
     return alertVC;
+}
+
+- (instancetype)initSingleAlertWithTitle:(NSString *)title
+                           actionHandler:(void (^)())handler
+{
+    return [self initSingleAlertWithTitle:title
+                              withMessage:nil
+                            actionHandler:handler];
 }
 
 - (instancetype)initAlertWithTitle:(NSString *)title
@@ -67,7 +77,15 @@
     return alertVC;
 }
 
-
+- (instancetype)initAlertWithTitle:(NSString *)title
+                     cancelHandler:(void (^)())cancelHandler
+                         OKHandler:(void (^)())okHandler
+{
+   return  [self initAlertWithTitle:title
+                 withMessage:nil
+               cancelHandler:cancelHandler
+                   OKHandler:okHandler];
+}
 
 
 @end

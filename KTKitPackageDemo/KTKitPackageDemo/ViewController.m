@@ -68,15 +68,16 @@
           }
     ];
     
-//    UIAlertController *alertSingle = [[UIAlertController alloc] initSingleAlertWithTitle:@"提醒" withMessage:@" tdsafsaf" actionHandler:^{
-//        NSLog(@"ok");
-//    }];
-//    
-//    UIAlertController *alert = [[UIAlertController alloc] initAlertWithTitle:@"1" withMessage:@"2" cancelHandler:^{
-//        NSLog(@"cancel");
-//    } OKHandler:^{
-//        NSLog(@"ok");
-//    }];
+    UIAlertController *alertSingle = [[UIAlertController alloc] initSingleAlertWithTitle:@"提醒" withMessage:@" tdsafsaf" actionHandler:^{
+        NSLog(@"ok");
+    }];
+    
+    UIAlertController *alert = [[UIAlertController alloc] initAlertWithTitle:@"确认删除"
+      cancelHandler:^{
+        NSLog(@"cancel");
+    } OKHandler:^{
+        NSLog(@"ok");
+    }];
     
     
     [_btn addAction:^(UIButton *sender) {
