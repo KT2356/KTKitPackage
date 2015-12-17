@@ -83,7 +83,6 @@
 //        NSLog(@"ok");
 //    }];
     
-    
     [_btn addAction:^(UIButton *sender) {
         [self presentViewController:alertSingle animated:YES completion:nil];
     }];
@@ -91,6 +90,7 @@
     [_textField returnHandler:^(NSString *textString) {
         NSLog(@"return : %@",textString);
     }];
+    
     
     [_textField textChangeHandler:^(NSString *textString) {
         NSLog(@"--%@",textString);

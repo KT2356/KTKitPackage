@@ -98,6 +98,7 @@ static const void *kTImageFinishBlockKey = &kTImageFinishBlockKey;
 - (void)storeImageToCache:(UIImage *)image {
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:image];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:self.imageStroageKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 

@@ -15,4 +15,5 @@ typedef void (^TextFielderHandlerArgs)(NSString *textString);
 
 - (void)textChangeHandler:(TextFielderHandlerArgs)textHandler;
 
+
 @end

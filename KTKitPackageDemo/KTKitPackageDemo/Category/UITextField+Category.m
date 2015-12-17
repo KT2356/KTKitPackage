@@ -7,6 +7,7 @@
 //
 
 #import "UITextField+Category.h"
+#import "UIView+Category.h"
 #import <objc/runtime.h>
 @interface UITextField ()<UITextFieldDelegate>
 @property (nonatomic, copy) TextFielderHandlerArgs returnHandler;
@@ -36,6 +37,32 @@ static const void *KTtextChangedHandler = &KTtextChangedHandler;
         self.returnHandler(textField.text);
     }
     return YES;
+}
+
+//防止键盘覆盖view
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    UIView *mainView = [self superViewController].view;
+    if (mainView.height - self.yPosition - self.height < 252) {
+        float transformY = 20 - (mainView.height - self.yPosition - self.height - 252);
+        UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, mainView.height, mainView.width, transformY)];
+        backView.backgroundColor = mainView.backgroundColor;
+        [mainView addSubview:backView];
+        [mainView transformToPoint:CGPointMake(0, -transformY) withDuration:0.5];
+    }
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    UIView *mainView = [self superViewController].view;
+    if (mainView.height - self.yPosition - self.height < 252) {
+        [mainView transformToPoint:CGPointMake(0, 0) withDuration:0.5 completion:^{
+            for (UIView *subView in mainView.subviews) {
+                if (subView.yPosition == mainView.height) {
+                    [subView removeFromSuperview];
+                }
+            }
+        }];
+    }
 }
 
 - (void)textFieldDidChange:(UITextField *)sender {

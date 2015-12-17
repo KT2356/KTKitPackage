@@ -43,5 +43,10 @@ typedef void (^ClickBlock)(UIView *sender);
 - (UIViewController*)superViewController;
 - (UINavigationController *)superNavigationController;
 
+#pragma mark - ResignFirstResponse
 - (void)resignFirstResponseInViewController;
+
+#pragma mark - CGAffineTransform
+- (void)transformToPoint:(CGPoint)point withDuration:(NSTimeInterval)lastTime;
+- (void)transformToPoint:(CGPoint)point withDuration:(NSTimeInterval)lastTime completion:(void(^)())finish;
 @end

@@ -247,4 +247,19 @@ static const void *clickBlockKey = &clickBlockKey;
     }
 }
 
+#pragma mark - CGAffineTransform
+- (void)transformToPoint:(CGPoint)point withDuration:(NSTimeInterval)lastTime{
+    [self transformToPoint:point withDuration:lastTime completion:nil];
+}
+
+- (void)transformToPoint:(CGPoint)point withDuration:(NSTimeInterval)lastTime completion:(void(^)())finish{
+    CGAffineTransform transform = CGAffineTransformMakeTranslation(point.x, point.y);
+    [UIView animateWithDuration:lastTime animations:^{
+        self.transform = transform;
+    } completion:^(BOOL finished) {
+        if (finish) {
+            finish();
+        }
+    }];
+}
 @end
