@@ -11,8 +11,8 @@ typedef void (^ActionHandler)(UIButton *sender);
 
 @interface UIButton (Category)
 
-- (void)addAction:(ActionHandler)actionHander;
+- (void)actionHandler:(ActionHandler)actionHander;
 
-- (void)addAction:(ActionHandler)actionHander forControlEvents:(UIControlEvents)controlEvents;
+- (void)actionHandler:(ActionHandler)actionHander forControlEvents:(UIControlEvents)controlEvents;
 
 @end

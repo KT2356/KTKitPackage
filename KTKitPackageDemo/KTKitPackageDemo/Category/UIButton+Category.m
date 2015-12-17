@@ -17,12 +17,12 @@
 static const void *ktButtonActionKey = &ktButtonActionKey;
 @implementation UIButton (Category)
 
-- (void)addAction:(ActionHandler)actionHander {
+- (void)actionHandler:(ActionHandler)actionHander {
     [self addTarget:self action:@selector(executeAction) forControlEvents:UIControlEventTouchUpInside];
     self.actionHander = actionHander;
 }
 
-- (void)addAction:(ActionHandler)actionHander forControlEvents:(UIControlEvents)controlEvents {
+- (void)actionHandler:(ActionHandler)actionHander forControlEvents:(UIControlEvents)controlEvents {
     [self addTarget:self action:@selector(executeAction) forControlEvents:controlEvents];
     self.actionHander = actionHander;
 }

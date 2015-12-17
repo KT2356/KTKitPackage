@@ -99,7 +99,7 @@
 //        NSLog(@"ok");
 //    }];
     
-    [_btn addAction:^(UIButton *sender) {
+    [_btn actionHandler:^(UIButton *sender) {
         [self presentViewController:alertSingle animated:YES completion:nil];
     }];
     
@@ -125,5 +125,8 @@
     }];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.view resignFirstResponseInViewController];
+}
 
 @end
