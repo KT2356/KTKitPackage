@@ -22,6 +22,10 @@
 		686D0C901C1FE413009CF128 /* KTImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 686D0C8F1C1FE413009CF128 /* KTImageView.m */; };
 		686D0C931C1FE42D009CF128 /* UIImageView+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 686D0C921C1FE42D009CF128 /* UIImageView+Category.m */; };
 		6891BE711C200E4E0092D7D8 /* UIButton+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 6891BE701C200E4E0092D7D8 /* UIButton+Category.m */; };
+		68BCE5061C224EB300DE8CF4 /* NSDate+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BCE5051C224EB300DE8CF4 /* NSDate+Category.m */; };
+		68BCE5091C224EC800DE8CF4 /* UIImage+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BCE5081C224EC800DE8CF4 /* UIImage+Category.m */; };
+		68BCE50D1C225E6D00DE8CF4 /* NSObject+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BCE50C1C225E6D00DE8CF4 /* NSObject+Category.m */; };
+		68BCE5101C2263E700DE8CF4 /* KTTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BCE50F1C2263E700DE8CF4 /* KTTableCell.m */; };
 		68F5B2191C20F0D300233560 /* UIAlertController+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F5B2181C20F0D300233560 /* UIAlertController+Category.m */; };
 		68F5B21C1C21203B00233560 /* UITextField+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F5B21B1C21203B00233560 /* UITextField+Category.m */; };
 		68F5B2221C21433A00233560 /* NSString+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F5B2211C21433A00233560 /* NSString+Category.m */; };
@@ -58,6 +62,15 @@
 		686D0C921C1FE42D009CF128 /* UIImageView+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Category.m"; sourceTree = "<group>"; };
 		6891BE6F1C200E4E0092D7D8 /* UIButton+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Category.h"; sourceTree = "<group>"; };
 		6891BE701C200E4E0092D7D8 /* UIButton+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Category.m"; sourceTree = "<group>"; };
+		68BCE5041C224EB200DE8CF4 /* NSDate+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Category.h"; sourceTree = "<group>"; };
+		68BCE5051C224EB300DE8CF4 /* NSDate+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Category.m"; sourceTree = "<group>"; };
+		68BCE5071C224EC800DE8CF4 /* UIImage+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Category.h"; sourceTree = "<group>"; };
+		68BCE5081C224EC800DE8CF4 /* UIImage+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Category.m"; sourceTree = "<group>"; };
+		68BCE50A1C22508B00DE8CF4 /* pinyin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
+		68BCE50B1C225E6D00DE8CF4 /* NSObject+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Category.h"; sourceTree = "<group>"; };
+		68BCE50C1C225E6D00DE8CF4 /* NSObject+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Category.m"; sourceTree = "<group>"; };
+		68BCE50E1C2263E700DE8CF4 /* KTTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTTableCell.h; sourceTree = "<group>"; };
+		68BCE50F1C2263E700DE8CF4 /* KTTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTTableCell.m; sourceTree = "<group>"; };
 		68F5B2171C20F0D300233560 /* UIAlertController+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Category.h"; sourceTree = "<group>"; };
 		68F5B2181C20F0D300233560 /* UIAlertController+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+Category.m"; sourceTree = "<group>"; };
 		68F5B21A1C21203B00233560 /* UITextField+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Category.h"; sourceTree = "<group>"; };
@@ -127,8 +140,15 @@
 		6824FE861C1E96CD0073C727 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				68BCE50A1C22508B00DE8CF4 /* pinyin.h */,
 				68F5B2201C21433A00233560 /* NSString+Category.h */,
 				68F5B2211C21433A00233560 /* NSString+Category.m */,
+				68BCE5041C224EB200DE8CF4 /* NSDate+Category.h */,
+				68BCE5051C224EB300DE8CF4 /* NSDate+Category.m */,
+				68BCE5071C224EC800DE8CF4 /* UIImage+Category.h */,
+				68BCE5081C224EC800DE8CF4 /* UIImage+Category.m */,
+				68BCE50B1C225E6D00DE8CF4 /* NSObject+Category.h */,
+				68BCE50C1C225E6D00DE8CF4 /* NSObject+Category.m */,
 				68F5B2231C214FD900233560 /* UIColor+Category.h */,
 				68F5B2241C214FD900233560 /* UIColor+Category.m */,
 				6824FE881C1E9A450073C727 /* UIView+Category.h */,
@@ -169,6 +189,8 @@
 				68615B641C1FB6B7006246D9 /* KTButton.m */,
 				686D0C8E1C1FE413009CF128 /* KTImageView.h */,
 				686D0C8F1C1FE413009CF128 /* KTImageView.m */,
+				68BCE50E1C2263E700DE8CF4 /* KTTableCell.h */,
+				68BCE50F1C2263E700DE8CF4 /* KTTableCell.m */,
 			);
 			path = BasicView;
 			sourceTree = "<group>";
@@ -250,8 +272,12 @@
 				6824FE8A1C1E9A450073C727 /* UIView+Category.m in Sources */,
 				686D0C931C1FE42D009CF128 /* UIImageView+Category.m in Sources */,
 				68F5B21C1C21203B00233560 /* UITextField+Category.m in Sources */,
+				68BCE50D1C225E6D00DE8CF4 /* NSObject+Category.m in Sources */,
 				68615B651C1FB6B7006246D9 /* KTButton.m in Sources */,
+				68BCE5101C2263E700DE8CF4 /* KTTableCell.m in Sources */,
+				68BCE5061C224EB300DE8CF4 /* NSDate+Category.m in Sources */,
 				68F5B2281C215EC100233560 /* UISlider+Category.m in Sources */,
+				68BCE5091C224EC800DE8CF4 /* UIImage+Category.m in Sources */,
 				6824FE711C1E96BD0073C727 /* main.m in Sources */,
 				68615B5F1C1EB5F9006246D9 /* KTLabel.m in Sources */,
 				68F5B2191C20F0D300233560 /* UIAlertController+Category.m in Sources */,

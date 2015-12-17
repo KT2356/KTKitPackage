@@ -13,6 +13,7 @@
 #import "UIAlertController+Category.h"
 #import "UITextField+Category.h"
 #import "UISlider+Category.h"
+#import "NSString+Category.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIView *ktView;
@@ -28,6 +29,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSString *test= @"pppddad";
+   // NSLog(@"%@",[test isPureLetter]);
+    
+    
     
     [_ktView setOrigin:CGPointMake(0, 0) withDuration:1];
     [_ktView setSize:CGSizeMake(100, 100) withDuration:2];

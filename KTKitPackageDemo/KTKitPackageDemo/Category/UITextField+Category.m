@@ -39,7 +39,7 @@ static const void *KTtextChangedHandler = &KTtextChangedHandler;
     return YES;
 }
 
-//防止键盘覆盖view
+//防止键盘覆盖view autoScroll
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     UIView *mainView = [self superViewController].view;
     if (mainView.height - self.yPosition - self.height < 252) {
