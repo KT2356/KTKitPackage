@@ -10,4 +10,9 @@
 
 @interface NSObject (Category)
 
+#pragma mark - runtime analysis object
+- (NSArray *)getAllProperties;
+- (NSArray *)getMethodsList;
+- (NSDictionary *)getDictionaryObject;
+
 @end

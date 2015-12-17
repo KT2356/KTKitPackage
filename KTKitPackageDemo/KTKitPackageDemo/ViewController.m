@@ -14,6 +14,9 @@
 #import "UITextField+Category.h"
 #import "UISlider+Category.h"
 #import "NSString+Category.h"
+#import "TestModel.h"
+#import "UISegmentedControl+Category.h"
+#import "UISwitch+Category.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIView *ktView;
@@ -22,6 +25,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *btn;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UISlider *slider;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
+@property (weak, nonatomic) IBOutlet UISwitch * switchBTN;
 
 @end
 
@@ -30,8 +35,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSString *test= @"pppddad";
-   // NSLog(@"%@",[test isPureLetter]);
+    TestModel *model = [[TestModel alloc] init];
+    model.name = @"KT";
+    model.age = @"21";
+    model.job = @"programmer";
+    model.locate = @"cd";
+    
+    NSLog(@"%@",model);
     
     
     
@@ -104,6 +114,14 @@
     
     [_slider valueChangedHandler:^(float currentValue) {
         NSLog(@"%f",currentValue);
+    }];
+    
+    [_segment valueChangedHandler:^(NSInteger currentIndex) {
+        NSLog(@"%d---",currentIndex);
+    }];
+    
+    [_switchBTN actionHandler:^(BOOL isSelected) {
+        NSLog(@"%hhd",isSelected);
     }];
 }
 

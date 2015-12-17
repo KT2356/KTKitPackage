@@ -26,6 +26,9 @@
 		68BCE5091C224EC800DE8CF4 /* UIImage+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BCE5081C224EC800DE8CF4 /* UIImage+Category.m */; };
 		68BCE50D1C225E6D00DE8CF4 /* NSObject+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BCE50C1C225E6D00DE8CF4 /* NSObject+Category.m */; };
 		68BCE5101C2263E700DE8CF4 /* KTTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BCE50F1C2263E700DE8CF4 /* KTTableCell.m */; };
+		68BCE5131C227ABD00DE8CF4 /* TestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BCE5121C227ABD00DE8CF4 /* TestModel.m */; };
+		68BCE5161C227F6E00DE8CF4 /* UISegmentedControl+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BCE5151C227F6E00DE8CF4 /* UISegmentedControl+Category.m */; };
+		68BCE5191C227F7E00DE8CF4 /* UISwitch+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BCE5181C227F7E00DE8CF4 /* UISwitch+Category.m */; };
 		68F5B2191C20F0D300233560 /* UIAlertController+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F5B2181C20F0D300233560 /* UIAlertController+Category.m */; };
 		68F5B21C1C21203B00233560 /* UITextField+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F5B21B1C21203B00233560 /* UITextField+Category.m */; };
 		68F5B2221C21433A00233560 /* NSString+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F5B2211C21433A00233560 /* NSString+Category.m */; };
@@ -71,6 +74,12 @@
 		68BCE50C1C225E6D00DE8CF4 /* NSObject+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Category.m"; sourceTree = "<group>"; };
 		68BCE50E1C2263E700DE8CF4 /* KTTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTTableCell.h; sourceTree = "<group>"; };
 		68BCE50F1C2263E700DE8CF4 /* KTTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTTableCell.m; sourceTree = "<group>"; };
+		68BCE5111C227ABD00DE8CF4 /* TestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestModel.h; sourceTree = "<group>"; };
+		68BCE5121C227ABD00DE8CF4 /* TestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestModel.m; sourceTree = "<group>"; };
+		68BCE5141C227F6E00DE8CF4 /* UISegmentedControl+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISegmentedControl+Category.h"; sourceTree = "<group>"; };
+		68BCE5151C227F6E00DE8CF4 /* UISegmentedControl+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISegmentedControl+Category.m"; sourceTree = "<group>"; };
+		68BCE5171C227F7E00DE8CF4 /* UISwitch+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISwitch+Category.h"; sourceTree = "<group>"; };
+		68BCE5181C227F7E00DE8CF4 /* UISwitch+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISwitch+Category.m"; sourceTree = "<group>"; };
 		68F5B2171C20F0D300233560 /* UIAlertController+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Category.h"; sourceTree = "<group>"; };
 		68F5B2181C20F0D300233560 /* UIAlertController+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+Category.m"; sourceTree = "<group>"; };
 		68F5B21A1C21203B00233560 /* UITextField+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Category.h"; sourceTree = "<group>"; };
@@ -117,6 +126,8 @@
 				6824FE861C1E96CD0073C727 /* Category */,
 				6824FE871C1E96F50073C727 /* IBInspectable */,
 				6824FE6F1C1E96BD0073C727 /* Supporting Files */,
+				68BCE5111C227ABD00DE8CF4 /* TestModel.h */,
+				68BCE5121C227ABD00DE8CF4 /* TestModel.m */,
 				6824FE751C1E96BD0073C727 /* ViewController.h */,
 				6824FE761C1E96BD0073C727 /* ViewController.m */,
 			);
@@ -163,6 +174,10 @@
 				68F5B21B1C21203B00233560 /* UITextField+Category.m */,
 				68F5B2261C215EC100233560 /* UISlider+Category.h */,
 				68F5B2271C215EC100233560 /* UISlider+Category.m */,
+				68BCE5141C227F6E00DE8CF4 /* UISegmentedControl+Category.h */,
+				68BCE5151C227F6E00DE8CF4 /* UISegmentedControl+Category.m */,
+				68BCE5171C227F7E00DE8CF4 /* UISwitch+Category.h */,
+				68BCE5181C227F7E00DE8CF4 /* UISwitch+Category.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -278,6 +293,9 @@
 				68BCE5061C224EB300DE8CF4 /* NSDate+Category.m in Sources */,
 				68F5B2281C215EC100233560 /* UISlider+Category.m in Sources */,
 				68BCE5091C224EC800DE8CF4 /* UIImage+Category.m in Sources */,
+				68BCE5161C227F6E00DE8CF4 /* UISegmentedControl+Category.m in Sources */,
+				68BCE5131C227ABD00DE8CF4 /* TestModel.m in Sources */,
+				68BCE5191C227F7E00DE8CF4 /* UISwitch+Category.m in Sources */,
 				6824FE711C1E96BD0073C727 /* main.m in Sources */,
 				68615B5F1C1EB5F9006246D9 /* KTLabel.m in Sources */,
 				68F5B2191C20F0D300233560 /* UIAlertController+Category.m in Sources */,

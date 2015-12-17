@@ -103,6 +103,17 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eZr-Kq-OV2">
+                                <rect key="frame" x="64" y="228" width="51" height="31"/>
+                            </switch>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3je-ln-scw">
+                                <rect key="frame" x="7" y="192" width="172" height="29"/>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                    <segment title="T"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -112,7 +123,9 @@
                         <outlet property="imageView" destination="bUQ-Vo-XUh" id="dxp-fp-oSF"/>
                         <outlet property="ktView" destination="7aM-Bw-hrl" id="p8t-0a-Ngs"/>
                         <outlet property="label" destination="yRu-wv-jcH" id="0yu-zC-ZTo"/>
+                        <outlet property="segment" destination="3je-ln-scw" id="QMK-9u-eeq"/>
                         <outlet property="slider" destination="gd1-4d-PR2" id="KIa-yA-BPK"/>
+                        <outlet property="switchBTN" destination="eZr-Kq-OV2" id="TW5-iU-NXC"/>
                         <outlet property="textField" destination="EeH-Ts-U05" id="BtZ-Qt-LfF"/>
                     </connections>
                 </viewController>
