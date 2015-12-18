@@ -8,20 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-typedef UITableViewCell* (^CellConfigBlock)(NSIndexPath *indexPath);
-typedef void(^SelectedBlock)(NSIndexPath *indexPath);
-typedef NSInteger(^RowCountBlock)(NSInteger section);
-typedef float(^SetRowHeightBlock)(NSIndexPath *indexPath);
-
+#import "KTTableViewDelegate.h"
+#import "KTTableViewDataSource.h"
 
 @interface UITableView (Category)
 
 //采用本delegate 需要调用
 - (void)usingKTDelegate;
 
-//RowCount
-- (void)setRowcountForSingleSection:(NSInteger)rowCount;
-- (void)setRowCountHandler:(RowCountBlock)setRowCount;
+
+//Bind Data
+- (void)bindDataCollectionArray:(NSMutableArray *)data;
+
+//update
+- (void)updateData:(NSMutableArray *)newData;
 
 //设置显示cell
 - (void)cellConfigHandler:(CellConfigBlock)settingCell;
@@ -33,7 +33,21 @@ typedef float(^SetRowHeightBlock)(NSIndexPath *indexPath);
 - (void)setTableAllRowHeight:(float)rowHeight;
 - (void)setTableRowHeight:(SetRowHeightBlock)rowHeightBlock;
 
-//设置section数
-- (void)setSectionCount:(NSInteger)sectionCount;
+
+
+//HeaderView Height
+- (void)setSectionHeightSingle:(float)sectionHeight;
+- (void)setSectionHeaderHeightBlock:(SetSectionHeaderHeight)setSectionHeaderBlock ;
+
+//Set HeaderView
+- (void)setSectionHeaderViewSingle:(UIView *)sectionHeaderView;
+- (void)setSectionHeaderView:(SetHeaderViewBlock)setSectionHeaderViewBlock ;
+
+//editAble
+- (void)isTableEditable:(BOOL)editable;
+
+//Delete
+- (void)deleteAnimation:(UITableViewRowAnimation)animation dataSourceBlock:(DeleteRowBlock)deleteRowBlock;
+
 
 @end

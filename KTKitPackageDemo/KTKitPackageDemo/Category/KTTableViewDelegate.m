@@ -34,4 +34,22 @@
 }
 
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (self.setSectionHeaderHeight) {
+        return self.setSectionHeaderHeight(section);
+    } else {
+        return self.sectionHeaderHeight;
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if (self.setHeaderViewBlock) {
+        return self.setHeaderViewBlock(section);
+    } else if (self.headerView) {
+        return self.headerView;
+    } else {
+        return nil;
+    }
+}
+
 @end

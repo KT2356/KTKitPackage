@@ -11,8 +11,10 @@
 @interface KTTableViewDataSource()
 @end
 @implementation KTTableViewDataSource
+@synthesize dataArrayCollection = _dataArrayCollection;
 
 #pragma mark - public methods
+
 + (instancetype)sharedModel {
     static KTTableViewDataSource *ktDataSource;
     static dispatch_once_t onceToken;
@@ -25,15 +27,60 @@
 
 #pragma mark - dataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.sectionCount;
+    return self.dataArrayCollection.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.rowCountBlock ? self.rowCountBlock(section) : self.rowCount;
+    if (self.dataArrayCollection.count > section) {
+        NSArray *subArray = self.dataArrayCollection[section];
+        if (subArray && subArray.count > 0) {
+            return subArray.count;
+        } else {
+            return 0;
+        }
+    } else {
+        return 0;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return self.settingCell ? self.settingCell(indexPath) : nil;
+    return self.settingCell ? self.settingCell(self.dataArrayCollection,indexPath) : nil;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath;
+{
+    return self.isEditable;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete && self.deleteBlock) {
+        
+        [self.dataArrayCollection[indexPath.section] removeObjectAtIndex:indexPath.row];
+        self.deleteBlock(self.dataArrayCollection,indexPath);
+        [tableView deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:indexPath] withRowAnimation:self.deleteAnimation];
+        [tableView reloadData];
+    }
+}
+
+- (void)updateDataArrayCollection:(NSMutableArray *)dataArrayCollection {
+    [_dataArrayCollection removeAllObjects];
+    [self setDataArrayCollection:dataArrayCollection];
+}
+
+#pragma mark - setter
+- (void)setDataArrayCollection:(NSMutableArray *)dataArrayCollection {
+    if (!dataArrayCollection) {
+        return;
+    }
+    if (!_dataArrayCollection) {
+        _dataArrayCollection = [@[] mutableCopy];
+    }
+    
+    for (id subObj in dataArrayCollection) {
+        if ([subObj isKindOfClass:[NSArray class]]) {
+            [_dataArrayCollection addObject:[subObj mutableCopy]];
+        }
+    }
 }
 
 @end

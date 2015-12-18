@@ -8,8 +8,6 @@
 
 #import "UITableView+Category.h"
 #import <objc/runtime.h>
-#import "KTTableViewDelegate.h"
-#import "KTTableViewDataSource.h"
 
 @interface UITableView ()
 @end
@@ -24,6 +22,15 @@
     self.tableFooterView = [[UIView alloc]init];
 }
 
+//Bind Data
+- (void)bindDataCollectionArray:(NSMutableArray *)data {
+    [[KTTableViewDataSource sharedModel] setDataArrayCollection:data];
+}
+
+- (void)updateData:(NSMutableArray *)newData {
+    [[KTTableViewDataSource sharedModel] updateDataArrayCollection:newData];
+}
+
 //设置rowHight
 - (void)setTableAllRowHeight:(float)rowHeight {
     [[KTTableViewDelegate sharedModel] setRowHeight:rowHeight];
@@ -31,21 +38,6 @@
 
 - (void)setTableRowHeight:(SetRowHeightBlock)rowHeightBlock {
     [[KTTableViewDelegate sharedModel] setSetRowHeight:rowHeightBlock];
-}
-
-//设置section数
-- (void)setSectionCount:(NSInteger)sectionCount {
-     [[KTTableViewDataSource sharedModel] setSectionCount:sectionCount];
-}
-
-//RowCount
-- (void)setRowCountHandler:(RowCountBlock)setRowCount {
-    [[KTTableViewDataSource sharedModel] setRowCountBlock:setRowCount];
-}
-
-- (void)setRowcountForSingleSection:(NSInteger)rowCount {
-    [[KTTableViewDataSource sharedModel] setSectionCount:1];
-    [[KTTableViewDataSource sharedModel] setRowCount:rowCount];
 }
 
 //设置显示cell
@@ -58,6 +50,34 @@
     [[KTTableViewDelegate sharedModel] setSelectedBlock:selectedCell];
 }
 
+//HeaderView Height
+- (void)setSectionHeightSingle:(float)sectionHeight {
+    [[KTTableViewDelegate sharedModel] setSectionHeaderHeight:sectionHeight];
+}
+
+- (void)setSectionHeaderHeightBlock:(SetSectionHeaderHeight)setSectionHeaderBlock {
+    [[KTTableViewDelegate sharedModel] setSetSectionHeaderHeight:setSectionHeaderBlock];
+}
+
+//Set HeaderView
+- (void)setSectionHeaderViewSingle:(UIView *)sectionHeaderView {
+    [[KTTableViewDelegate sharedModel] setHeaderView:sectionHeaderView];
+}
+
+- (void)setSectionHeaderView:(SetHeaderViewBlock)setSectionHeaderViewBlock {
+    [[KTTableViewDelegate sharedModel] setSetHeaderViewBlock:setSectionHeaderViewBlock];
+}
+
+
+//Edit
+- (void)isTableEditable:(BOOL)editable {
+    [[KTTableViewDataSource sharedModel] setIsEditable:editable];
+}
+
+- (void)deleteAnimation:(UITableViewRowAnimation)animation dataSourceBlock:(DeleteRowBlock)deleteRowBlock {
+    [[KTTableViewDataSource sharedModel] setDeleteAnimation:animation];
+    [[KTTableViewDataSource sharedModel] setDeleteBlock:deleteRowBlock];
+}
 
 
 

@@ -19,15 +19,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.tableView dismissNavigationBarWhenOffset];
-    NSArray *dataArray = @[@"1",@"2",@"33",@"44",@"44",@"555"];
+    NSArray *data = @[@"1",@"2",@"33",@"44",@"44",@"555"];
+    NSMutableArray *dataArray = [@[] mutableCopy];
+    
+    [dataArray addObject:data];
    
     [self.tableView usingKTDelegate];
     [self.tableView setTableAllRowHeight:50];
-    [self.tableView setRowcountForSingleSection:dataArray.count];
+    [self.tableView bindDataCollectionArray:dataArray];
     
-    [self.tableView cellConfigHandler:^id(NSIndexPath *indexPath) {
+    
+    [self.tableView cellConfigHandler:^UITableViewCell *(NSMutableArray *dataCollection, NSIndexPath *indexPath) {
         testcell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"test" forIndexPath:indexPath];
-        cell.textLabel.text = dataArray[indexPath.row];
+        cell.textLabel.text = dataCollection[indexPath.section][indexPath.row];
         return cell;
     }];
     
@@ -35,6 +39,22 @@
     [self.tableView selectedHandler:^(NSIndexPath *indexPath) {
         NSLog(@"%d",indexPath.row);
     }];
+
+    
+    [self.tableView isTableEditable:YES];
+    
+    [self.tableView deleteAnimation:UITableViewRowAnimationFade dataSourceBlock:^(NSMutableArray *newdataCollection, NSIndexPath *indexPath) {
+        NSLog(@"new data :%@",newdataCollection);
+    }];
+    
+    
+//    NSArray *data2 = @[@"1",@"2"];
+//    NSMutableArray *dataArray2 = [@[] mutableCopy];
+//    [dataArray2 addObject:data2];
+//    
+//    [self.tableView updateData:dataArray2];
+//    [self.tableView reloadData];
+
     
 }
 

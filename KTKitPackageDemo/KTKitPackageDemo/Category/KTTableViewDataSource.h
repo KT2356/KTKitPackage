@@ -9,15 +9,18 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-typedef UITableViewCell* (^CellConfigBlock)(NSIndexPath *indexPath);
-typedef NSInteger(^RowCountBlock)(NSInteger section);
+typedef UITableViewCell* (^CellConfigBlock)(NSMutableArray *dataCollection, NSIndexPath *indexPath);
+typedef void(^DeleteRowBlock)(NSMutableArray *newdataCollection,NSIndexPath *indexPath);
 
 @interface KTTableViewDataSource : NSObject<UITableViewDataSource>
+
 + (instancetype)sharedModel ;
+- (void)updateDataArrayCollection:(NSMutableArray *)dataArrayCollection;
 
-@property (nonatomic, assign) NSInteger sectionCount;
-@property (nonatomic, assign) NSInteger rowCount;
-
+@property (nonatomic, strong) NSMutableArray *dataArrayCollection;
 @property (nonatomic, copy) CellConfigBlock settingCell;
-@property (nonatomic, copy) RowCountBlock rowCountBlock;
+
+@property (nonatomic, assign) BOOL isEditable;
+@property (nonatomic, assign) UITableViewRowAnimation deleteAnimation;
+@property (nonatomic, copy) DeleteRowBlock deleteBlock;
 @end
