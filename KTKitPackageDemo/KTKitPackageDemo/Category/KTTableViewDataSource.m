@@ -63,7 +63,6 @@
 }
 
 - (void)updateDataArrayCollection:(NSMutableArray *)dataArrayCollection {
-    [_dataArrayCollection removeAllObjects];
     [self setDataArrayCollection:dataArrayCollection];
 }
 
@@ -76,6 +75,7 @@
         _dataArrayCollection = [@[] mutableCopy];
     }
     
+    [_dataArrayCollection removeAllObjects];
     for (id subObj in dataArrayCollection) {
         if ([subObj isKindOfClass:[NSArray class]]) {
             [_dataArrayCollection addObject:[subObj mutableCopy]];
@@ -83,4 +83,6 @@
     }
 }
 
+- (void)dealloc {
+}
 @end

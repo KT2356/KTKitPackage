@@ -7,7 +7,7 @@
 //
 
 #import "TestTableV.h"
-#import "UIScrollView+Category.h"
+//#import "UIScrollView+Category.h"
 #import "UITableView+Category.h"
 #import "testcell.h"
 
@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.tableView dismissNavigationBarWhenOffset];
+    //[self.tableView dismissNavigationBarWhenOffset];
     NSArray *data = @[@"1",@"2",@"33",@"44",@"44",@"555"];
     NSMutableArray *dataArray = [@[] mutableCopy];
     
@@ -39,6 +39,7 @@
     [self.tableView selectedHandler:^(NSIndexPath *indexPath) {
         NSLog(@"%d",indexPath.row);
     }];
+    
 
     
     [self.tableView isTableEditable:YES];

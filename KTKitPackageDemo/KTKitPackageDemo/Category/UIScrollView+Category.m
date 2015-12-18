@@ -28,11 +28,11 @@
 }
 
 
-- (void)dealloc {
-    if ([self isKindOfClass:[UITableView class]]) {
-            [self removeObserver:self forKeyPath:@"contentOffset"];
-    }
-}
+//- (void)dealloc {
+//    if ([self isKindOfClass:[UITableView class]]) {
+//            [self removeObserver:self forKeyPath:@"contentOffset"];
+//    }
+//}
 
 
 @end
