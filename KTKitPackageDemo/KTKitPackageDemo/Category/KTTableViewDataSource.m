@@ -29,19 +29,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataArray.count;
+    return self.rowCountBlock ? self.rowCountBlock(section) : self.rowCount;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     return self.settingCell ? self.settingCell(indexPath) : nil;
-}
-
-#pragma mark - setter/getter
-- (NSArray *)dataArray {
-    if (!_dataArray) {
-        _dataArray = @[];
-    }
-    return _dataArray;
 }
 
 @end

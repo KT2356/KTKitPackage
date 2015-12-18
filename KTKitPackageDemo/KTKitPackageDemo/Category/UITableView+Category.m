@@ -16,27 +16,49 @@
 
 @implementation UITableView (Category)
 
+
+//采用本delegate 需要调用
 - (void)usingKTDelegate {
     self.delegate   = [KTTableViewDelegate sharedModel];
     self.dataSource = [KTTableViewDataSource sharedModel];
-    
     self.tableFooterView = [[UIView alloc]init];
 }
 
-
-
-- (void)setTableRowForSingleSection:(NSArray *)rowDataArray {
-    [[KTTableViewDataSource sharedModel] setSectionCount:1];
-    [[KTTableViewDataSource sharedModel] setDataArray:rowDataArray];
+//设置rowHight
+- (void)setTableAllRowHeight:(float)rowHeight {
+    [[KTTableViewDelegate sharedModel] setRowHeight:rowHeight];
 }
 
+- (void)setTableRowHeight:(SetRowHeightBlock)rowHeightBlock {
+    [[KTTableViewDelegate sharedModel] setSetRowHeight:rowHeightBlock];
+}
+
+//设置section数
+- (void)setSectionCount:(NSInteger)sectionCount {
+     [[KTTableViewDataSource sharedModel] setSectionCount:sectionCount];
+}
+
+//RowCount
+- (void)setRowCountHandler:(RowCountBlock)setRowCount {
+    [[KTTableViewDataSource sharedModel] setRowCountBlock:setRowCount];
+}
+
+- (void)setRowcountForSingleSection:(NSInteger)rowCount {
+    [[KTTableViewDataSource sharedModel] setSectionCount:1];
+    [[KTTableViewDataSource sharedModel] setRowCount:rowCount];
+}
+
+//设置显示cell
 - (void)cellConfigHandler:(CellConfigBlock)settingCell {
     [[KTTableViewDataSource sharedModel] setSettingCell:settingCell];
 }
 
+//cell选中操作
 - (void)selectedHandler:(SelectedBlock)selectedCell {
     [[KTTableViewDelegate sharedModel] setSelectedBlock:selectedCell];
 }
+
+
 
 
 @end

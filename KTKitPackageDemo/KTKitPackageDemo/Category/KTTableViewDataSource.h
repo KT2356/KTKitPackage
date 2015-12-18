@@ -9,11 +9,15 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-typedef id(^CellConfigBlock)(NSIndexPath *indexPath);
+typedef UITableViewCell* (^CellConfigBlock)(NSIndexPath *indexPath);
+typedef NSInteger(^RowCountBlock)(NSInteger section);
+
 @interface KTTableViewDataSource : NSObject<UITableViewDataSource>
 + (instancetype)sharedModel ;
 
-@property (nonatomic, strong) NSArray *dataArray;
 @property (nonatomic, assign) NSInteger sectionCount;
+@property (nonatomic, assign) NSInteger rowCount;
+
 @property (nonatomic, copy) CellConfigBlock settingCell;
+@property (nonatomic, copy) RowCountBlock rowCountBlock;
 @end

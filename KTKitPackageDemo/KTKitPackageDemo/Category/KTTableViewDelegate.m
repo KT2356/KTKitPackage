@@ -30,7 +30,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100;
+    return self.setRowHeight ? self.setRowHeight(indexPath) : self.rowHeight;
 }
 
 
