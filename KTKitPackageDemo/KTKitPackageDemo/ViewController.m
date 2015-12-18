@@ -117,11 +117,11 @@
     }];
     
     [_segment valueChangedHandler:^(NSInteger currentIndex) {
-        NSLog(@"%d---",currentIndex);
+        NSLog(@"%ld---",(long)currentIndex);
     }];
     
     [_switchBTN actionHandler:^(BOOL isSelected) {
-        NSLog(@"%hhd",isSelected);
+        //NSLog(@"%hhd",isSelected);
     }];
 }
 

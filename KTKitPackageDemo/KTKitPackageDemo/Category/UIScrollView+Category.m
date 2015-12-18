@@ -13,7 +13,7 @@
 
 #pragma mark - KVO 渐隐导航栏
 - (void)dismissNavigationBarWhenOffset {
-    [self addObserver:self forKeyPath:@"contentOffset" options: NSKeyValueObservingOptionNew context: nil];
+//    [self addObserver:self forKeyPath:@"contentOffset" options: NSKeyValueObservingOptionNew context: nil];
 }
 
 
@@ -28,11 +28,11 @@
 }
 
 
-- (void)dealloc {
-    if ([self isKindOfClass:[UITableView class]]) {
-            [self removeObserver:self forKeyPath:@"contentOffset"];
-    }
-}
+//- (void)dealloc {
+//    if ([self isKindOfClass:[UITableView class]]) {
+//            [self removeObserver:self forKeyPath:@"contentOffset"];
+//    }
+//}
 
 
 @end

@@ -7,26 +7,37 @@
 //
 
 #import "TestTableV.h"
-#import "UIScrollView+Category.h"
+#import "UITableView+Category.h"
+#import "testcell.h"
+
+@interface TestTableV ()
+@end
 
 @implementation TestTableV
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.tableView dismissNavigationBarWhenOffset];
+    //[self.tableView dismissNavigationBarWhenOffset];
     
-    self.sectionCount = 1;
-    self.rowCountArray = @[@10];
-    [self selectedHandler:^(NSIndexPath *indexPath) {
-        NSLog(@"select %d",indexPath.row);
-    }];
-    
-    __weak typeof(self) weakself = self;
-    [self setCellHandler:^UITableViewCell *(NSIndexPath *indexPath) {
-        UITableViewCell *cell = [weakself.tableView dequeueReusableCellWithIdentifier:@"111"];
-        cell.textLabel.text = @"2334";
+   
+    [self.tableView usingKTDelegate];
+    [self.tableView setTableRowForSingleSection:@[@"111",@"333"]];
+    [self.tableView cellConfigHandler:^id(NSIndexPath *indexPath) {
+        testcell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"test" forIndexPath:indexPath];
+        cell.textLabel.text = @"111";
         return cell;
     }];
     
+    [self.tableView selectedHandler:^(NSIndexPath *indexPath) {
+        NSLog(@"%d",indexPath.row);
+    }];
+    
 }
+
+- (void)viewDidAppear:(BOOL)animated {
+
+}
+
+
+
 @end

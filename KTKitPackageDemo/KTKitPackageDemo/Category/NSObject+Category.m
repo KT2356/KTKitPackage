@@ -12,7 +12,11 @@
 @implementation NSObject (Category)
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@  %@",[self class],[self getDictionaryObject]];
+    if ([self getDictionaryObject]) {
+        return [NSString stringWithFormat:@"%@  %@",[self class],[self getDictionaryObject]];
+    } else {
+        return nil;
+    }
 }
 
 - (NSArray *)getAllProperties {
