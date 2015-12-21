@@ -74,8 +74,9 @@
     if (!_dataArrayCollection) {
         _dataArrayCollection = [@[] mutableCopy];
     }
-    
-    [_dataArrayCollection removeAllObjects];
+    if (_dataArrayCollection.count) {
+        [_dataArrayCollection removeAllObjects];
+    }
     for (id subObj in dataArrayCollection) {
         if ([subObj isKindOfClass:[NSArray class]]) {
             [_dataArrayCollection addObject:[subObj mutableCopy]];

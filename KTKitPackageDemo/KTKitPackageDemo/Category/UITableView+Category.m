@@ -10,75 +10,98 @@
 #import <objc/runtime.h>
 
 @interface UITableView ()
+@property (nonatomic, strong) KTTableViewDelegate *ktDelegate;
+@property (nonatomic, strong) KTTableViewDataSource *ktDataSource;
 @end
 
 @implementation UITableView (Category)
-
+static const void *ktTableDelegateKey = &ktTableDelegateKey;
+static const void *ktTableDatesourceKey = &ktTableDatesourceKey;
 
 //采用本delegate 需要调用
 - (void)usingKTDelegate {
-    self.delegate   = [KTTableViewDelegate sharedModel];
-    self.dataSource = [KTTableViewDataSource sharedModel];
+    self.ktDelegate = [[KTTableViewDelegate alloc] init];
+    self.ktDataSource = [[KTTableViewDataSource alloc] init];
+    
+    self.delegate   = self.ktDelegate;
+    self.dataSource = self.ktDataSource;
+    
     self.tableFooterView = [[UIView alloc]init];
 }
 
 //Bind Data
 - (void)bindDataCollectionArray:(NSMutableArray *)data {
-    [[KTTableViewDataSource sharedModel] setDataArrayCollection:data];
+    [self.ktDataSource setDataArrayCollection:data];
 }
 
 - (void)updateData:(NSMutableArray *)newData {
-    [[KTTableViewDataSource sharedModel] updateDataArrayCollection:newData];
+    [self.ktDataSource updateDataArrayCollection:newData];
 }
 
 //设置rowHight
 - (void)setTableAllRowHeight:(float)rowHeight {
-    [[KTTableViewDelegate sharedModel] setRowHeight:rowHeight];
+    [self.ktDelegate setRowHeight:rowHeight];
 }
 
 - (void)setTableRowHeight:(SetRowHeightBlock)rowHeightBlock {
-    [[KTTableViewDelegate sharedModel] setSetRowHeight:rowHeightBlock];
+    [self.ktDelegate setSetRowHeight:rowHeightBlock];
 }
 
 //设置显示cell
 - (void)cellConfigHandler:(CellConfigBlock)settingCell {
-    [[KTTableViewDataSource sharedModel] setSettingCell:settingCell];
+    [self.ktDataSource setSettingCell:settingCell];
 }
 
 //cell选中操作
 - (void)selectedHandler:(SelectedBlock)selectedCell {
-    [[KTTableViewDelegate sharedModel] setSelectedBlock:selectedCell];
+    [self.ktDelegate setSelectedBlock:selectedCell];
 }
 
 //HeaderView Height
 - (void)setSectionHeightSingle:(float)sectionHeight {
-    [[KTTableViewDelegate sharedModel] setSectionHeaderHeight:sectionHeight];
+    [self.ktDelegate setSectionHeaderHeight:sectionHeight];
 }
 
 - (void)setSectionHeaderHeightBlock:(SetSectionHeaderHeight)setSectionHeaderBlock {
-    [[KTTableViewDelegate sharedModel] setSetSectionHeaderHeight:setSectionHeaderBlock];
+    [self.ktDelegate setSetSectionHeaderHeight:setSectionHeaderBlock];
 }
 
 //Set HeaderView
 - (void)setSectionHeaderViewSingle:(UIView *)sectionHeaderView {
-    [[KTTableViewDelegate sharedModel] setHeaderView:sectionHeaderView];
+    [self.ktDelegate setHeaderView:sectionHeaderView];
 }
 
 - (void)setSectionHeaderView:(SetHeaderViewBlock)setSectionHeaderViewBlock {
-    [[KTTableViewDelegate sharedModel] setSetHeaderViewBlock:setSectionHeaderViewBlock];
+    [self.ktDelegate setSetHeaderViewBlock:setSectionHeaderViewBlock];
 }
 
 
 //Edit
 - (void)isTableEditable:(BOOL)editable {
-    [[KTTableViewDataSource sharedModel] setIsEditable:editable];
+    [self.ktDataSource setIsEditable:editable];
 }
 
 - (void)deleteAnimation:(UITableViewRowAnimation)animation dataSourceBlock:(DeleteRowBlock)deleteRowBlock {
-    [[KTTableViewDataSource sharedModel] setDeleteAnimation:animation];
-    [[KTTableViewDataSource sharedModel] setDeleteBlock:deleteRowBlock];
+    [self.ktDataSource setDeleteAnimation:animation];
+    [self.ktDataSource setDeleteBlock:deleteRowBlock];
 }
 
+#pragma mark - Runtime Setter/getter
+- (KTTableViewDelegate *)ktDelegate {
+    return objc_getAssociatedObject(self, ktTableDelegateKey);
+}
+
+- (void)setKtDelegate:(KTTableViewDelegate *)ktDelegate {
+    objc_setAssociatedObject(self, ktTableDelegateKey, ktDelegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (KTTableViewDataSource *)ktDataSource {
+    return  objc_getAssociatedObject(self, ktTableDatesourceKey);
+}
+
+- (void)setKtDataSource:(KTTableViewDataSource *)ktDataSource {
+    objc_setAssociatedObject(self, ktTableDatesourceKey, ktDataSource, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
 
 
 @end
