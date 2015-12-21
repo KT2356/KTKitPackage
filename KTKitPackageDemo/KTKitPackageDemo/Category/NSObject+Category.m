@@ -11,13 +11,13 @@
 
 @implementation NSObject (Category)
 
-//- (NSString *)description {
-//    if ([self getDictionaryObject]) {
-//        return [NSString stringWithFormat:@"%@  %@",[self class],[self getDictionaryObject]];
-//    } else {
-//        return nil;
-//    }
-//}
+- (NSString *)description {
+    if ([self getDictionaryObject]) {
+        return [NSString stringWithFormat:@"%@  %@",[self class],[self getDictionaryObject]];
+    } else {
+        return nil;
+    }
+}
 
 - (NSArray *)getAllProperties {
     u_int count;

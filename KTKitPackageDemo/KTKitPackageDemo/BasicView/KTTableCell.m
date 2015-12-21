@@ -39,6 +39,7 @@
     [self setNeedsLayout];
 }
 
+#pragma mark - touches
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated{
 }
 
@@ -52,11 +53,21 @@
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
+    [self backgroundColorDefault];
+}
+
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [super touchesMoved:touches withEvent:event];
+    [self backgroundColorDefault];
+}
+
+
+- (void)backgroundColorDefault {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
         self.backgroundColor = [UIColor whiteColor];
     });
 }
+
 
 #pragma mark -getter
 - (NSString *)identifierWithClass {
