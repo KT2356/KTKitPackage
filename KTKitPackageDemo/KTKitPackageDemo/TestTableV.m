@@ -32,6 +32,7 @@
     [self.tableView cellConfigHandler:^UITableViewCell *(NSMutableArray *dataCollection, NSIndexPath *indexPath) {
         testcell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"test" forIndexPath:indexPath];
         cell.textLabel.text = dataCollection[indexPath.section][indexPath.row];
+        [cell setSeparatorInsetZero];
         return cell;
     }];
     

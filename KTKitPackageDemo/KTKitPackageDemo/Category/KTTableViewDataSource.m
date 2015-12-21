@@ -14,14 +14,8 @@
 @synthesize dataArrayCollection = _dataArrayCollection;
 
 #pragma mark - public methods
-
-+ (instancetype)sharedModel {
-    static KTTableViewDataSource *ktDataSource;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        ktDataSource = [[KTTableViewDataSource alloc] init];
-    });
-    return ktDataSource;
+- (void)updateDataArrayCollection:(NSMutableArray *)dataArrayCollection {
+    [self setDataArrayCollection:dataArrayCollection];
 }
 
 
@@ -60,10 +54,6 @@
         [tableView deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:indexPath] withRowAnimation:self.deleteAnimation];
         [tableView reloadData];
     }
-}
-
-- (void)updateDataArrayCollection:(NSMutableArray *)dataArrayCollection {
-    [self setDataArrayCollection:dataArrayCollection];
 }
 
 #pragma mark - setter

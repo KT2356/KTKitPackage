@@ -12,14 +12,6 @@
 
 @implementation KTTableViewDelegate
 
-+ (instancetype)sharedModel {
-    static KTTableViewDelegate *ktdelegate;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        ktdelegate = [[KTTableViewDelegate alloc] init];
-    });
-    return ktdelegate;
-}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

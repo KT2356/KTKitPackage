@@ -24,6 +24,5 @@ typedef UIView* (^SetHeaderViewBlock)(NSInteger section);
 @property (nonatomic, assign) float sectionHeaderHeight;
 @property (nonatomic, strong) UIView *headerView;
 
-+ (instancetype)sharedModel;
 
 @end

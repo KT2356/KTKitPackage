@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KTTableCell.h"
 
-@interface testcell : UITableViewCell
+@interface testcell : KTTableCell
+@property (weak, nonatomic) IBOutlet UILabel *label;
+@property (weak, nonatomic) IBOutlet UILabel *labelView;
 
 @end

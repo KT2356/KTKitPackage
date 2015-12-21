@@ -12,4 +12,9 @@
 IB_DESIGNABLE
 @interface KTTableCell : UITableViewCell
 
+@property (nonatomic, strong, readonly) NSString *identifierWithClass;
+
+- (void)hideSectionSeparator;
+- (void)setSeparatorInsetZero;
+
 @end

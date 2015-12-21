@@ -31,7 +31,6 @@
 		68BCE5161C227F6E00DE8CF4 /* UISegmentedControl+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BCE5151C227F6E00DE8CF4 /* UISegmentedControl+Category.m */; };
 		68BCE5191C227F7E00DE8CF4 /* UISwitch+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BCE5181C227F7E00DE8CF4 /* UISwitch+Category.m */; };
 		68BCE5221C22941800DE8CF4 /* UIScrollView+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BCE5211C22941800DE8CF4 /* UIScrollView+Category.m */; };
-		68BCE52B1C22B28100DE8CF4 /* KTTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BCE52A1C22B28100DE8CF4 /* KTTableViewController.m */; };
 		68BCE52E1C22B86A00DE8CF4 /* TestTableV.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BCE52D1C22B86A00DE8CF4 /* TestTableV.m */; };
 		68BCE5311C239AC000DE8CF4 /* UITableView+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BCE5301C239AC000DE8CF4 /* UITableView+Category.m */; };
 		68BCE5341C239AE700DE8CF4 /* KTTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BCE5331C239AE700DE8CF4 /* KTTableViewDataSource.m */; };
@@ -92,8 +91,6 @@
 		68BCE5181C227F7E00DE8CF4 /* UISwitch+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISwitch+Category.m"; sourceTree = "<group>"; };
 		68BCE5201C22941800DE8CF4 /* UIScrollView+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+Category.h"; sourceTree = "<group>"; };
 		68BCE5211C22941800DE8CF4 /* UIScrollView+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+Category.m"; sourceTree = "<group>"; };
-		68BCE5291C22B28100DE8CF4 /* KTTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTTableViewController.h; sourceTree = "<group>"; };
-		68BCE52A1C22B28100DE8CF4 /* KTTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTTableViewController.m; sourceTree = "<group>"; };
 		68BCE52C1C22B86A00DE8CF4 /* TestTableV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestTableV.h; sourceTree = "<group>"; };
 		68BCE52D1C22B86A00DE8CF4 /* TestTableV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestTableV.m; sourceTree = "<group>"; };
 		68BCE52F1C239AC000DE8CF4 /* UITableView+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Category.h"; sourceTree = "<group>"; };
@@ -244,8 +241,6 @@
 				686D0C8F1C1FE413009CF128 /* KTImageView.m */,
 				68BCE50E1C2263E700DE8CF4 /* KTTableCell.h */,
 				68BCE50F1C2263E700DE8CF4 /* KTTableCell.m */,
-				68BCE5291C22B28100DE8CF4 /* KTTableViewController.h */,
-				68BCE52A1C22B28100DE8CF4 /* KTTableViewController.m */,
 			);
 			path = BasicView;
 			sourceTree = "<group>";
@@ -322,7 +317,6 @@
 			files = (
 				68615B621C1FB5B0006246D9 /* KTTextField.m in Sources */,
 				6824FE771C1E96BD0073C727 /* ViewController.m in Sources */,
-				68BCE52B1C22B28100DE8CF4 /* KTTableViewController.m in Sources */,
 				6824FE741C1E96BD0073C727 /* AppDelegate.m in Sources */,
 				68F5B2251C214FD900233560 /* UIColor+Category.m in Sources */,
 				68BCE5371C239AF700DE8CF4 /* KTTableViewDelegate.m in Sources */,

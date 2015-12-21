@@ -14,7 +14,6 @@ typedef void(^DeleteRowBlock)(NSMutableArray *newdataCollection,NSIndexPath *ind
 
 @interface KTTableViewDataSource : NSObject<UITableViewDataSource>
 
-+ (instancetype)sharedModel ;
 - (void)updateDataArrayCollection:(NSMutableArray *)dataArrayCollection;
 
 @property (nonatomic, strong) NSMutableArray *dataArrayCollection;
