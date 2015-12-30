@@ -18,6 +18,7 @@
 #import "UISegmentedControl+Category.h"
 #import "UISwitch+Category.h"
 
+
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIView *ktView;
 @property (weak, nonatomic) IBOutlet UILabel *label;
@@ -34,6 +35,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+     [UIApplication sharedApplication].applicationIconBadgeNumber = 4;
     
     TestModel *model = [[TestModel alloc] init];
     model.name = @"KT";
@@ -66,6 +69,9 @@
     [_imageView clickAction:^(UIView *sender) {
         NSLog(@"image click");
     }];
+    [_imageView addShadowWithOffSet:CGSizeMake(3, 3)
+                        shadowColor:[UIColor redColor]
+                            opacity:0.5f];
     
     [_imageView setPlaceholderImg:[UIImage imageNamed:@"a"]
                    imageURLString:@"http://down1.cnmo.com/app/a129/fangzi00.jpg"

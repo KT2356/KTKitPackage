@@ -262,4 +262,22 @@ static const void *clickBlockKey = &clickBlockKey;
         }
     }];
 }
+
+- (void)addshadow {
+    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:self.bounds];
+    self.layer.shadowOffset = CGSizeZero;
+    self.layer.shadowOpacity = 0.7f;
+    self.layer.shadowPath = shadowPath.CGPath;
+}
+
+- (void)addShadowWithOffSet:(CGSize)size
+                shadowColor:(UIColor *)color
+                    opacity:(float)opacity
+{
+    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:self.bounds];
+    self.layer.shadowOffset = size;
+    self.layer.shadowColor = color.CGColor;
+    self.layer.shadowOpacity = opacity;
+    self.layer.shadowPath = shadowPath.CGPath;
+}
 @end

@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "UIWindow+EasterEgg.h"
+#import "UIButton+Category.h"
 
 @interface AppDelegate ()
 
@@ -14,11 +16,39 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    [self.window easterEggTrigerCount:10
+                         trigerHander:^{
+                             [self showEasterEgg];
+                         }];
     return YES;
 }
+
+#pragma mark - showEgg
+- (void)showEasterEgg {
+    UIView *easterEggView = [[UIView alloc] initWithFrame:CGRectMake(50, -200, 250, 200)];
+    [easterEggView setBackgroundColor:[UIColor redColor]];
+    easterEggView.layer.cornerRadius = 15;
+    [self.window addSubview:easterEggView];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(200, 0, 50, 50);
+    [button setTitle:@"关闭" forState:UIControlStateNormal];
+    [easterEggView addSubview:button];
+    [button actionHandler:^(UIButton *sender) {
+        [easterEggView removeFromSuperview];
+    }];
+    
+    
+    [UIView animateWithDuration:1
+                          delay:0
+         usingSpringWithDamping:0.2
+          initialSpringVelocity:0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         easterEggView.frame = CGRectMake(50, 100, 250, 200);
+                     } completion:nil];
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

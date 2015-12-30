@@ -15,6 +15,7 @@
 		6824FE7F1C1E96BD0073C727 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6824FE7D1C1E96BD0073C727 /* LaunchScreen.storyboard */; };
 		6824FE8A1C1E9A450073C727 /* UIView+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 6824FE891C1E9A450073C727 /* UIView+Category.m */; };
 		6824FE901C1E9BA40073C727 /* UIView+IBspectable.m in Sources */ = {isa = PBXBuildFile; fileRef = 6824FE8F1C1E9BA40073C727 /* UIView+IBspectable.m */; };
+		683CE4FD1C32638700F84399 /* UIWindow+EasterEgg.m in Sources */ = {isa = PBXBuildFile; fileRef = 683CE4FC1C32638700F84399 /* UIWindow+EasterEgg.m */; };
 		68615B5C1C1EA84F006246D9 /* KTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68615B5B1C1EA84F006246D9 /* KTView.m */; };
 		68615B5F1C1EB5F9006246D9 /* KTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68615B5E1C1EB5F9006246D9 /* KTLabel.m */; };
 		68615B621C1FB5B0006246D9 /* KTTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 68615B611C1FB5B0006246D9 /* KTTextField.m */; };
@@ -58,6 +59,8 @@
 		6824FE891C1E9A450073C727 /* UIView+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Category.m"; sourceTree = "<group>"; };
 		6824FE8E1C1E9BA40073C727 /* UIView+IBspectable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+IBspectable.h"; sourceTree = "<group>"; };
 		6824FE8F1C1E9BA40073C727 /* UIView+IBspectable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+IBspectable.m"; sourceTree = "<group>"; };
+		683CE4FB1C32638700F84399 /* UIWindow+EasterEgg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIWindow+EasterEgg.h"; path = "../UIWindow+EasterEgg.h"; sourceTree = "<group>"; };
+		683CE4FC1C32638700F84399 /* UIWindow+EasterEgg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIWindow+EasterEgg.m"; path = "../UIWindow+EasterEgg.m"; sourceTree = "<group>"; };
 		68615B5A1C1EA84F006246D9 /* KTView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTView.h; sourceTree = "<group>"; };
 		68615B5B1C1EA84F006246D9 /* KTView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTView.m; sourceTree = "<group>"; };
 		68615B5D1C1EB5F9006246D9 /* KTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTLabel.h; sourceTree = "<group>"; };
@@ -213,6 +216,8 @@
 				68BCE5331C239AE700DE8CF4 /* KTTableViewDataSource.m */,
 				68BCE5351C239AF700DE8CF4 /* KTTableViewDelegate.h */,
 				68BCE5361C239AF700DE8CF4 /* KTTableViewDelegate.m */,
+				683CE4FB1C32638700F84399 /* UIWindow+EasterEgg.h */,
+				683CE4FC1C32638700F84399 /* UIWindow+EasterEgg.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -335,6 +340,7 @@
 				68BCE5091C224EC800DE8CF4 /* UIImage+Category.m in Sources */,
 				68BCE5161C227F6E00DE8CF4 /* UISegmentedControl+Category.m in Sources */,
 				68BCE5131C227ABD00DE8CF4 /* TestModel.m in Sources */,
+				683CE4FD1C32638700F84399 /* UIWindow+EasterEgg.m in Sources */,
 				68BCE5191C227F7E00DE8CF4 /* UISwitch+Category.m in Sources */,
 				6824FE711C1E96BD0073C727 /* main.m in Sources */,
 				68615B5F1C1EB5F9006246D9 /* KTLabel.m in Sources */,

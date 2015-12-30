@@ -49,4 +49,10 @@ typedef void (^ClickBlock)(UIView *sender);
 #pragma mark - CGAffineTransform
 - (void)transformToPoint:(CGPoint)point withDuration:(NSTimeInterval)lastTime;
 - (void)transformToPoint:(CGPoint)point withDuration:(NSTimeInterval)lastTime completion:(void(^)())finish;
+
+#pragma mark - shadows
+- (void)addshadow;
+- (void)addShadowWithOffSet:(CGSize)size
+                shadowColor:(UIColor *)color
+                    opacity:(float)opacity;
 @end
