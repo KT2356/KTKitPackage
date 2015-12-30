@@ -38,7 +38,7 @@
     
     
     [self.tableView selectedHandler:^(NSIndexPath *indexPath) {
-        NSLog(@"%d",indexPath.row);
+        NSLog(@"%ld",(long)indexPath.row);
     }];
     
 

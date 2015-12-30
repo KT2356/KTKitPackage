@@ -9,10 +9,10 @@
 #import "UIWindow+EasterEgg.h"
 #import <objc/runtime.h>
 
-static NSInteger easterEggClickcount;
 @interface UIWindow ()
 @property (nonatomic, strong) UIView   *tempView;
 @property (nonatomic, strong) NSNumber *trigerCount;
+@property (nonatomic, strong) NSNumber *easterEggClickcount;
 @property (nonatomic, strong) NSNumber *tempTimeStamp;
 @property (nonatomic, copy)   EasterEggTrigerBlock trigerBlock;
 @end
@@ -23,6 +23,7 @@ static void const *kEasterEggTempViewKey   = &kEasterEggTempViewKey;
 static void const *kEasterEggTrigerBlock   = &kEasterEggTrigerBlock;
 static void const *kEasterEggTrigerCount   = &kEasterEggTrigerCount;
 static void const *kEasterEggTempTimeStamp = &kEasterEggTempTimeStamp;
+static void const *keasterEggClickcountkey = &keasterEggClickcountkey;
 
 #pragma mark - public methods
 - (void)easterEggTrigerCount:(NSInteger)trigerCount
@@ -44,19 +45,20 @@ static void const *kEasterEggTempTimeStamp = &kEasterEggTempTimeStamp;
             //保证两次单击的不是同一个对象
             if (![testView isEqual:self.tempView]) {
                 self.tempView = testView;//缓存上次单击的对象
-                
-                easterEggClickcount ++;
-                NSLog(@"easterEggClickcount : %ld",(long)easterEggClickcount);
+                NSInteger count = [self.easterEggClickcount integerValue];
+                count ++;
+                self.easterEggClickcount = [NSNumber numberWithInteger:count];
+                NSLog(@"easterEggClickcount : %ld",(long)[self.easterEggClickcount integerValue]);
                 //等于trigerPoint 触发彩蛋
-                if (easterEggClickcount == [self.trigerCount integerValue]) {
-                    easterEggClickcount = 0;
+                if ([self.easterEggClickcount integerValue] == [self.trigerCount integerValue]) {
+                    self.easterEggClickcount = 0;
                     if (self.trigerBlock) {
                         self.trigerBlock();
                     }
                 }
                 //超过trigerPoint 归零
-                if (easterEggClickcount > [self.trigerCount integerValue]) {
-                    easterEggClickcount = 0;
+                if ([self.easterEggClickcount integerValue] > [self.trigerCount integerValue]) {
+                    self.easterEggClickcount = 0;
                 }
             }
         }
@@ -97,4 +99,11 @@ static void const *kEasterEggTempTimeStamp = &kEasterEggTempTimeStamp;
     objc_setAssociatedObject(self, kEasterEggTempTimeStamp, tempTimeStamp, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
+- (NSNumber *)easterEggClickcount {
+    return  objc_getAssociatedObject(self, keasterEggClickcountkey);
+}
+
+- (void)setEasterEggClickcount:(NSNumber *)easterEggClickcount {
+    objc_setAssociatedObject(self, keasterEggClickcountkey, easterEggClickcount, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
 @end
