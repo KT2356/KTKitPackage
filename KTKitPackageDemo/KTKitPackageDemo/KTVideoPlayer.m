@@ -11,8 +11,8 @@
 
 @interface KTVideoPlayer()
 {
-    BOOL _played;
     BOOL _isShowToolbar;
+    BOOL _isInSliderChangedStated;
     NSDateFormatter *_dateFormatter;
 }
 
@@ -38,18 +38,22 @@
     self.frame = frame;
     self.urlString = urlString;
     
+    
     AVPlayerLayer *playerLayer = (AVPlayerLayer *)self.layer;
     [playerLayer setPlayer:self.player];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
+
     return self;
 }
+
+
 
 - (void)awakeFromNib {
     [self.slider setThumbImage:[UIImage imageNamed:@"bullet_white"] forState:UIControlStateNormal];
     self.playBtn.enabled = NO;
     self.clipsToBounds = YES;
-} 
+}
 
 - (void)dealloc {
     [self.playerItem removeObserver:self forKeyPath:@"status" context:nil];
@@ -65,12 +69,12 @@
 
 #pragma mark - Action response
 - (IBAction)playAction:(UIButton *)sender {
-    if (!_played) {
+    if (!sender.selected) {
         [self.player play];
     } else {
         [self.player pause];
     }
-    _played = !_played;
+    sender.selected = ~sender.selected;
 }
 
 - (IBAction)fullScreenAction:(UIButton *)sender {
@@ -78,16 +82,44 @@
 }
 
 - (IBAction)didtappedBackground:(UITapGestureRecognizer *)sender {
-    _isShowToolbar = ~_isShowToolbar;
-    if(_isShowToolbar) {
-        [UIView animateWithDuration:0.3 animations:^{
-            self.toolView.transform = CGAffineTransformMakeTranslation(0, self.toolView.bounds.size.height);
-        }];
-    } else {
-        [UIView animateWithDuration:0.3 animations:^{
-            self.toolView.transform = CGAffineTransformMakeTranslation(0, 0);
+//    if (sender) {
+//        <#statements#>
+//    }
+//    if(!_isShowToolbar) {
+//        [UIView animateWithDuration:0.3 animations:^{
+//            self.toolView.transform = CGAffineTransformMakeTranslation(0, self.toolView.bounds.size.height);
+//        }];
+//    } else {
+//        [UIView animateWithDuration:0.3 animations:^{
+//            self.toolView.transform = CGAffineTransformMakeTranslation(0, 0);
+//        }];
+//    }
+//    _isShowToolbar = ~_isShowToolbar;
+}
+
+- (IBAction)videoSlierChangeValue:(id)sender {
+    _isInSliderChangedStated = YES;
+    UISlider *slider = (UISlider *)sender;
+    if (slider.value == 0.000000) {
+        __weak typeof(self) weakSelf = self;
+        [self.player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
+            [weakSelf.player play];
         }];
     }
+}
+
+
+
+- (IBAction)videoSlierChangeValueEnd:(id)sender {
+    _isInSliderChangedStated = NO;
+    UISlider *slider = (UISlider *)sender;
+    NSLog(@"value end:%f",slider.value);
+    CMTime changedTime = CMTimeMakeWithSeconds(slider.value, 1);
+    
+    __weak typeof(self) weakSelf = self;
+    [self.player seekToTime:changedTime completionHandler:^(BOOL finished) {
+        [weakSelf.player play];
+    }];
 }
 
 #pragma mark - KVO
@@ -103,15 +135,18 @@
             [self customVideoSlider:duration];// 自定义UISlider外观
             NSLog(@"movie total duration:%f",CMTimeGetSeconds(duration));
             [self monitoringPlayback:self.playerItem];// 监听播放状态
+            self.timeLabel.text = [NSString stringWithFormat:@"00:00/%@",self.totalTime];
         } else if ([playerItem status] == AVPlayerStatusFailed) {
             NSLog(@"AVPlayerStatusFailed");
         }
     } else if ([keyPath isEqualToString:@"loadedTimeRanges"]) {
-        NSTimeInterval timeInterval = [self availableDuration];// 计算缓冲进度
-        NSLog(@"Time Interval:%f",timeInterval);
-        CMTime duration = _playerItem.duration;
-        CGFloat totalDuration = CMTimeGetSeconds(duration);
-        [self.progressBar setProgress:timeInterval / totalDuration animated:YES];
+        if (!_isInSliderChangedStated) {
+            NSTimeInterval timeInterval = [self availableDuration];// 计算缓冲进度
+            NSLog(@"Time Interval:%f",timeInterval);
+            CMTime duration = _playerItem.duration;
+            CGFloat totalDuration = CMTimeGetSeconds(duration);
+            [self.progressBar setProgress:timeInterval / totalDuration animated:YES];
+        }
     }
 }
 
@@ -135,43 +170,9 @@
 }
 
 
-- (IBAction)videoSlierChangeValue:(id)sender {
-    UISlider *slider = (UISlider *)sender;
-    NSLog(@"value change:%f",slider.value);
-    
-    if (slider.value == 0.000000) {
-        __weak typeof(self) weakSelf = self;
-        [self.player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
-            [weakSelf.player play];
-        }];
-    }
-}
-
-- (IBAction)videoSlierChangeValueEnd:(id)sender {
-    UISlider *slider = (UISlider *)sender;
-    NSLog(@"value end:%f",slider.value);
-    CMTime changedTime = CMTimeMakeWithSeconds(slider.value, 1);
-    
-    __weak typeof(self) weakSelf = self;
-    [self.player seekToTime:changedTime completionHandler:^(BOOL finished) {
-        [weakSelf.player play];
-        //[weakSelf.stateButton setTitle:@"Stop" forState:UIControlStateNormal];
-    }];
-}
-
-- (void)updateVideoSlider:(CGFloat)currentSecond {
-    [self.slider setValue:currentSecond animated:YES];
-}
-
-
 - (void)moviePlayDidEnd:(NSNotification *)notification {
     NSLog(@"Play end");
-    
-    __weak typeof(self) weakSelf = self;
-    [self.player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
-        [weakSelf.slider setValue:0.0 animated:YES];
-        //[weakSelf.stateButton setTitle:@"Play" forState:UIControlStateNormal];
-    }];
+    self.playBtn.selected = NO;
 }
 
 - (void)monitoringPlayback:(AVPlayerItem *)playerItem {
