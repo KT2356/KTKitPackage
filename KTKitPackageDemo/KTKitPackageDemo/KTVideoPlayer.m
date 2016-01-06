@@ -17,11 +17,13 @@
     NSDateFormatter *_dateFormatter;
 }
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 @property (weak, nonatomic) IBOutlet UISlider *slider;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressBar;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *playBtn;
 @property (weak, nonatomic) IBOutlet UIView *toolView;
+@property (weak, nonatomic) IBOutlet UIImageView *loadingImageView;
 
 @property (nonatomic, strong) AVPlayer *player;
 @property (nonatomic, strong) AVPlayerItem *playerItem;
@@ -38,12 +40,18 @@
 @implementation KTVideoPlayer
 
 #pragma mark - public method
-- (instancetype)initWithFrame:(CGRect)frame urlString:(NSString *)urlString {
+- (instancetype)initWithFrame:(CGRect)frame
+                    urlString:(NSString *)urlString
+                 loadingImage:(UIImage *)loadingImage
+{
     self = [[[NSBundle mainBundle] loadNibNamed:@"KTVideoPlayer" owner:self options:nil] firstObject];
     self.frame = frame;
     self.originFrame = frame;
     self.urlString = urlString;
-    
+    if (loadingImage) {
+        self.loadingImageView.image = loadingImage;
+        self.loadingImageView.hidden = NO;
+    }
     
     _playerLayer = (AVPlayerLayer *)self.layer;
     _playerLayer.videoGravity=AVLayerVideoGravityResizeAspectFill;//视频填充模式
@@ -227,6 +235,7 @@
             NSLog(@"AVPlayerStatusReadyToPlay");
             CMTime duration = self.playerItem.duration;// 获取视频总长度
             CGFloat totalSecond = playerItem.duration.value / playerItem.duration.timescale;// 转换成秒
+            self.playBtn.selected = YES;
             _totalTime = [self convertTime:totalSecond];// 转换成播放时间
             [self customVideoSlider:duration];// 自定义UISlider外观
             NSLog(@"movie total duration:%f",CMTimeGetSeconds(duration));
@@ -239,13 +248,22 @@
             NSTimeInterval timeInterval = [self availableDuration];// 计算缓冲进度
             NSLog(@"Time Interval:%f",timeInterval);
             if (timeInterval > 0 ) {
+                self.loadingImageView.hidden = YES;
                 self.playBtn.enabled = YES;
                 [self monitoringPlayback:self.playerItem];// 监听播放状态
-                self.timeLabel.text = [NSString stringWithFormat:@"00:00/%@",self.totalTime];
             }
             CMTime duration = _playerItem.duration;
             CGFloat totalDuration = CMTimeGetSeconds(duration);
             [self.progressBar setProgress:timeInterval / totalDuration animated:YES];
+            if (self.playBtn.selected) {
+                if (self.slider.value < timeInterval-1) {
+                    [self.player play];
+                    [self.spinner stopAnimating];
+                } else {
+                    [self.player pause];
+                    [self.spinner startAnimating];
+                }
+            }
         }
     }
 }
