@@ -8,11 +8,12 @@
 
 #import "KTVideoPlayer.h"
 #import <AVFoundation/AVFoundation.h>
+#define ScreenWidth [UIScreen mainScreen].bounds.size.width
+#define ScreenHeight [UIScreen mainScreen].bounds.size.height
 
-@interface KTVideoPlayer()
+@interface KTVideoPlayer()<UIGestureRecognizerDelegate>
 {
     BOOL _isShowToolbar;
-    BOOL _isInSliderChangedStated;
     NSDateFormatter *_dateFormatter;
 }
 
@@ -24,23 +25,29 @@
 
 @property (nonatomic, strong) AVPlayer *player;
 @property (nonatomic, strong) AVPlayerItem *playerItem;
+@property (nonatomic, strong) AVPlayerLayer *playerLayer;
 
 @property (nonatomic ,strong) id playbackTimeObserver;
 @property (nonatomic, strong) NSString *urlString;
 @property (nonatomic, strong) NSString *totalTime;
+@property (nonatomic, assign) BOOL isInSliderChangedStated;
+@property (nonatomic, assign) BOOL ignoreFirstKVO;//1s后设置slider 防止跳动
+@property (nonatomic, assign) CGRect originFrame;
 @end
 
 @implementation KTVideoPlayer
 
-#pragma mark - life cycle
+#pragma mark - public method
 - (instancetype)initWithFrame:(CGRect)frame urlString:(NSString *)urlString {
     self = [[[NSBundle mainBundle] loadNibNamed:@"KTVideoPlayer" owner:self options:nil] firstObject];
     self.frame = frame;
+    self.originFrame = frame;
     self.urlString = urlString;
     
     
-    AVPlayerLayer *playerLayer = (AVPlayerLayer *)self.layer;
-    [playerLayer setPlayer:self.player];
+    _playerLayer = (AVPlayerLayer *)self.layer;
+    _playerLayer.videoGravity=AVLayerVideoGravityResizeAspectFill;//视频填充模式
+    [_playerLayer setPlayer:self.player];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
 
@@ -48,11 +55,20 @@
 }
 
 
-
+#pragma mark - life cycle
 - (void)awakeFromNib {
     [self.slider setThumbImage:[UIImage imageNamed:@"bullet_white"] forState:UIControlStateNormal];
     self.playBtn.enabled = NO;
     self.clipsToBounds = YES;
+    self.timeLabel.text = @"Loading...";
+    _isShowToolbar = YES;
+    _isInSliderChangedStated = NO;
+    _ignoreFirstKVO = NO;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTappedBackGround)];
+    tap.delegate = self;
+    [self addGestureRecognizer:tap];
+
 }
 
 - (void)dealloc {
@@ -77,48 +93,129 @@
     sender.selected = ~sender.selected;
 }
 
+- (void)rotateAnimationDuring:(NSTimeInterval)time
+                     rotation:(CGFloat)angle
+                        frame:(CGRect)frame
+             trailingConstant:(CGFloat)trailingValue
+               bottomConstant:(CGFloat)bottomValue
+                  finishBlock:(void(^)())finishblock
+{
+    [UIView animateWithDuration:time animations:^{
+        [self setTransform:CGAffineTransformMakeRotation(angle)];
+        self.frame = frame;
+        
+        for (NSLayoutConstraint *constrain in self.constraints) {
+            if (constrain.firstAttribute == NSLayoutAttributeTrailing) {
+                constrain.constant = trailingValue;
+                [self setNeedsLayout];
+            }
+            if (constrain.firstAttribute == NSLayoutAttributeBottom) {
+                constrain.constant = bottomValue;
+                [self setNeedsLayout];
+            }
+        }
+        [self layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        if (finishblock) {
+            finishblock();
+        }
+    }];
+}
+
 - (IBAction)fullScreenAction:(UIButton *)sender {
-    
+    if (!sender.selected) {
+        sender.selected = YES;
+        
+        [self rotateAnimationDuring:0.5
+                           rotation:M_PI/2
+                              frame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)
+                   trailingConstant:ScreenWidth - ScreenHeight
+                     bottomConstant:-ScreenWidth + ScreenHeight
+         finishBlock:^{
+             if ([self.delegate respondsToSelector:@selector(KTVideoPlayerDidRotateToLandscape:)]) {
+                 [self.delegate KTVideoPlayerDidRotateToLandscape:sender.selected];
+             }
+         }
+         ];
+    }
+    else {
+        sender.selected = NO;
+        if ([self.delegate respondsToSelector:@selector(KTVideoPlayerDidRotateToLandscape:)]) {
+            [self.delegate KTVideoPlayerDidRotateToLandscape:sender.selected];
+        }
+        [self rotateAnimationDuring:0.5
+                           rotation:0
+                              frame:self.originFrame
+                   trailingConstant:0
+                     bottomConstant:0
+                        finishBlock:nil];
+    }
 }
 
-- (IBAction)didtappedBackground:(UITapGestureRecognizer *)sender {
-//    if (sender) {
-//        <#statements#>
-//    }
-//    if(!_isShowToolbar) {
-//        [UIView animateWithDuration:0.3 animations:^{
-//            self.toolView.transform = CGAffineTransformMakeTranslation(0, self.toolView.bounds.size.height);
-//        }];
-//    } else {
-//        [UIView animateWithDuration:0.3 animations:^{
-//            self.toolView.transform = CGAffineTransformMakeTranslation(0, 0);
-//        }];
-//    }
-//    _isShowToolbar = ~_isShowToolbar;
+
+#pragma mark - TapGesture
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    CGPoint gestureP = [gestureRecognizer locationInView:self];
+    if (gestureP.y > self.bounds.size.height - 35 && _isShowToolbar) {
+        return NO;
+    } else {
+        return YES;
+    }
 }
 
+- (void)showToolBar:(BOOL)shown {
+    if (!shown) {
+        _isShowToolbar = NO;
+        [UIView animateWithDuration:0.3 animations:^{
+            self.toolView.transform = CGAffineTransformMakeTranslation(0, self.toolView.bounds.size.height);
+        }];
+    } else {
+        _isShowToolbar = YES;
+        [UIView animateWithDuration:0.3 animations:^{
+            self.toolView.transform = CGAffineTransformMakeTranslation(0, 0);
+        }];
+    }
+}
+
+- (void)didTappedBackGround {
+    if(_isShowToolbar) {
+        [self showToolBar:NO];
+    } else {
+        [self showToolBar:YES];
+    }
+}
+
+#pragma mark - Slider
 - (IBAction)videoSlierChangeValue:(id)sender {
     _isInSliderChangedStated = YES;
+    if (self.playBtn.selected) {
+        [self.player pause];
+        self.playBtn.selected = NO;
+    }
     UISlider *slider = (UISlider *)sender;
     if (slider.value == 0.000000) {
         __weak typeof(self) weakSelf = self;
-        [self.player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
+        [weakSelf.player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
             [weakSelf.player play];
         }];
     }
 }
 
 
-
 - (IBAction)videoSlierChangeValueEnd:(id)sender {
-    _isInSliderChangedStated = NO;
     UISlider *slider = (UISlider *)sender;
     NSLog(@"value end:%f",slider.value);
     CMTime changedTime = CMTimeMakeWithSeconds(slider.value, 1);
     
     __weak typeof(self) weakSelf = self;
-    [self.player seekToTime:changedTime completionHandler:^(BOOL finished) {
+    [weakSelf.player seekToTime:changedTime completionHandler:^(BOOL finished) {
+        weakSelf.playBtn.selected = YES;
         [weakSelf.player play];
+        weakSelf.isInSliderChangedStated = NO;
+        weakSelf.ignoreFirstKVO = YES;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            weakSelf.ignoreFirstKVO = NO;
+        });
     }];
 }
 
@@ -128,14 +225,12 @@
     if ([keyPath isEqualToString:@"status"]) {
         if ([playerItem status] == AVPlayerStatusReadyToPlay) {
             NSLog(@"AVPlayerStatusReadyToPlay");
-            self.playBtn.enabled = YES;
             CMTime duration = self.playerItem.duration;// 获取视频总长度
             CGFloat totalSecond = playerItem.duration.value / playerItem.duration.timescale;// 转换成秒
             _totalTime = [self convertTime:totalSecond];// 转换成播放时间
             [self customVideoSlider:duration];// 自定义UISlider外观
             NSLog(@"movie total duration:%f",CMTimeGetSeconds(duration));
-            [self monitoringPlayback:self.playerItem];// 监听播放状态
-            self.timeLabel.text = [NSString stringWithFormat:@"00:00/%@",self.totalTime];
+            
         } else if ([playerItem status] == AVPlayerStatusFailed) {
             NSLog(@"AVPlayerStatusFailed");
         }
@@ -143,6 +238,11 @@
         if (!_isInSliderChangedStated) {
             NSTimeInterval timeInterval = [self availableDuration];// 计算缓冲进度
             NSLog(@"Time Interval:%f",timeInterval);
+            if (timeInterval > 0 ) {
+                self.playBtn.enabled = YES;
+                [self monitoringPlayback:self.playerItem];// 监听播放状态
+                self.timeLabel.text = [NSString stringWithFormat:@"00:00/%@",self.totalTime];
+            }
             CMTime duration = _playerItem.duration;
             CGFloat totalDuration = CMTimeGetSeconds(duration);
             [self.progressBar setProgress:timeInterval / totalDuration animated:YES];
@@ -172,6 +272,7 @@
 
 - (void)moviePlayDidEnd:(NSNotification *)notification {
     NSLog(@"Play end");
+    [self.player pause];
     self.playBtn.selected = NO;
 }
 
@@ -179,9 +280,11 @@
     __weak typeof(self) weakSelf = self;
     self.playbackTimeObserver = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 1) queue:NULL usingBlock:^(CMTime time) {
         CGFloat currentSecond = playerItem.currentTime.value/playerItem.currentTime.timescale;// 计算当前在第几秒
-        [weakSelf.slider setValue:currentSecond animated:YES];
         NSString *timeString = [weakSelf convertTime:currentSecond];
         weakSelf.timeLabel.text = [NSString stringWithFormat:@"%@/%@",timeString,weakSelf.totalTime];
+        if (!weakSelf.isInSliderChangedStated && !weakSelf.ignoreFirstKVO) {
+            [weakSelf.slider setValue:currentSecond animated:YES];
+        }
     }];
 }
 

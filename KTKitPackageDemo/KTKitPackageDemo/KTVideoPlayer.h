@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface KTVideoPlayer : UIView
+@protocol KTVideoPlayerDelegate <NSObject>
+@required
+- (void)KTVideoPlayerDidRotateToLandscape:(BOOL)isLandscape;
+@end
 
+@interface KTVideoPlayer : UIView
+@property (nonatomic, weak) id <KTVideoPlayerDelegate> delegate;
 - (instancetype)initWithFrame:(CGRect)frame urlString:(NSString *)urlString;
 @end
