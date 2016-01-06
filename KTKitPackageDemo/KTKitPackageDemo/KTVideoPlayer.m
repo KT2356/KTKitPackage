@@ -8,7 +8,7 @@
 
 #import "KTVideoPlayer.h"
 #import <AVFoundation/AVFoundation.h>
-#define ScreenWidth [UIScreen mainScreen].bounds.size.width
+#define ScreenWidth  [UIScreen mainScreen].bounds.size.width
 #define ScreenHeight [UIScreen mainScreen].bounds.size.height
 
 @interface KTVideoPlayer()<UIGestureRecognizerDelegate>
@@ -58,10 +58,57 @@
     [_playerLayer setPlayer:self.player];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
-
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification  object:[UIDevice currentDevice]]; //Get the notification centre for the app
+    
     return self;
 }
 
+- (void)orientationChanged:(NSNotification *)note  {
+    UIDeviceOrientation o = [[UIDevice currentDevice] orientation];
+    switch (o) {
+        case UIDeviceOrientationPortrait:    {        // Device oriented vertically, home button on the bottom
+            if ([self.delegate respondsToSelector:@selector(KTVideoPlayerDidRotateToLandscape:)]) {
+                [self.delegate KTVideoPlayerDidRotateToLandscape:NO];
+            }
+            [self rotateAnimationDuring:0.5
+                               rotation:0
+                                  frame:self.originFrame
+                       trailingConstant:0
+                         bottomConstant:0
+                            finishBlock:nil];
+            break;
+        }
+        case UIDeviceOrientationLandscapeLeft:{      // Device oriented horizontally, home button on the right
+            [self rotateAnimationDuring:0.5
+                               rotation:M_PI/2
+                                  frame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)
+                       trailingConstant:ScreenWidth - ScreenHeight
+                         bottomConstant:-ScreenWidth + ScreenHeight
+                            finishBlock:^{
+                                if ([self.delegate respondsToSelector:@selector(KTVideoPlayerDidRotateToLandscape:)]) {
+                                    [self.delegate KTVideoPlayerDidRotateToLandscape:YES];
+                                }
+                            }];
+            break;
+        }
+        case UIDeviceOrientationLandscapeRight:  {    // Device oriented horizontally, home button on the left
+            [self rotateAnimationDuring:0.5
+                               rotation:M_PI/2*3
+                                  frame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)
+                       trailingConstant:ScreenWidth - ScreenHeight
+                         bottomConstant:-ScreenWidth + ScreenHeight
+                            finishBlock:^{
+                                if ([self.delegate respondsToSelector:@selector(KTVideoPlayerDidRotateToLandscape:)]) {
+                                    [self.delegate KTVideoPlayerDidRotateToLandscape:YES];
+                                }
+                            }];
+            break;
+        }
+        default:
+            break;
+    }   
+}
 
 #pragma mark - life cycle
 - (void)awakeFromNib {
@@ -83,6 +130,8 @@
     [self.playerItem removeObserver:self forKeyPath:@"status" context:nil];
     [self.playerItem removeObserver:self forKeyPath:@"loadedTimeRanges" context:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification  object:[UIDevice currentDevice]];
+    
     [self.player removeTimeObserver:self.playbackTimeObserver];
 }
 
@@ -113,11 +162,11 @@
         self.frame = frame;
         
         for (NSLayoutConstraint *constrain in self.constraints) {
-            if (constrain.firstAttribute == NSLayoutAttributeTrailing) {
+            if (constrain.firstItem == self && constrain.firstAttribute == NSLayoutAttributeTrailing) {
                 constrain.constant = trailingValue;
                 [self setNeedsLayout];
             }
-            if (constrain.firstAttribute == NSLayoutAttributeBottom) {
+            if (constrain.firstItem == self && constrain.firstAttribute == NSLayoutAttributeBottom) {
                 constrain.constant = bottomValue;
                 [self setNeedsLayout];
             }
@@ -246,7 +295,6 @@
     } else if ([keyPath isEqualToString:@"loadedTimeRanges"]) {
         if (!_isInSliderChangedStated) {
             NSTimeInterval timeInterval = [self availableDuration];// 计算缓冲进度
-            NSLog(@"Time Interval:%f",timeInterval);
             if (timeInterval > 0 ) {
                 self.loadingImageView.hidden = YES;
                 self.playBtn.enabled = YES;
@@ -256,7 +304,7 @@
             CGFloat totalDuration = CMTimeGetSeconds(duration);
             [self.progressBar setProgress:timeInterval / totalDuration animated:YES];
             if (self.playBtn.selected) {
-                if (self.slider.value < timeInterval-1) {
+                if (self.slider.value <= timeInterval-1.5) {
                     [self.player play];
                     [self.spinner stopAnimating];
                 } else {
