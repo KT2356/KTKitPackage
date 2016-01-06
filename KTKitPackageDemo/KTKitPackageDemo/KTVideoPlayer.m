@@ -278,6 +278,7 @@
     }
 }
 
+#pragma mark - private methods
 //获取视频缩略图
 - (UIImage *)getImage:(NSString *)videoURL
 {
@@ -343,7 +344,7 @@
     }
 }
 
-
+//缓存时间长度
 - (NSTimeInterval)availableDuration {
     NSArray *loadedTimeRanges = [[self.player currentItem] loadedTimeRanges];
     CMTimeRange timeRange = [loadedTimeRanges.firstObject CMTimeRangeValue];// 获取缓冲区域
@@ -353,6 +354,7 @@
     return result;
 }
 
+//slider View
 - (void)customVideoSlider:(CMTime)duration {
     self.slider.maximumValue = CMTimeGetSeconds(duration);
     UIGraphicsBeginImageContextWithOptions((CGSize){ 1, 1 }, NO, 0.0f);
@@ -364,6 +366,7 @@
 }
 
 
+//play finished
 - (void)moviePlayDidEnd:(NSNotification *)notification {
     NSLog(@"Play end");
     [self.player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
@@ -372,6 +375,7 @@
     self.playBtn.selected = NO;
 }
 
+//拖动时间
 - (void)monitoringPlayback:(AVPlayerItem *)playerItem {
     __weak typeof(self) weakSelf = self;
     self.playbackTimeObserver = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 1) queue:NULL usingBlock:^(CMTime time) {
