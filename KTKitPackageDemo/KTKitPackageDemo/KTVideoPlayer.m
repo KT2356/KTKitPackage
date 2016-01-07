@@ -110,26 +110,27 @@
                         frame:(CGRect)frame
              trailingConstant:(CGFloat)trailingValue
                bottomConstant:(CGFloat)bottomValue
-             spinnerYposition:(CGFloat)spinnerY
                   finishBlock:(void(^)())finishblock
 {
     [UIView animateWithDuration:time animations:^{
         [self setTransform:CGAffineTransformMakeRotation(angle)];
-        self.frame = frame;
-        
+        //调整设置frame的位置，防止frame.height < constrain时候的warning
+        if (angle != 0) {
+            self.frame = frame;
+        }
+
         for (NSLayoutConstraint *constrain in self.constraints) {
             if (constrain.firstItem == self && constrain.firstAttribute == NSLayoutAttributeTrailing) {
                 constrain.constant = trailingValue;
                 [self setNeedsLayout];
             }
-            if (constrain.secondItem == _toolView && constrain.firstAttribute == NSLayoutAttributeBottom) {
+            if (constrain.firstItem == self && constrain.firstAttribute == NSLayoutAttributeBottom) {
                 constrain.constant = bottomValue;
                 [self setNeedsLayout];
             }
-            if (constrain.firstItem == _spinner && constrain.firstAttribute == NSLayoutAttributeCenterY) {
-                constrain.constant = spinnerY;
-                [self setNeedsLayout];
-            }
+        }
+        if (angle == 0) {
+            self.frame = frame;
         }
         [self layoutIfNeeded];
     } completion:^(BOOL finished) {
@@ -148,7 +149,6 @@
                               frame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)
                    trailingConstant:ScreenWidth - ScreenHeight
                      bottomConstant:-ScreenWidth + ScreenHeight
-                   spinnerYposition: ScreenWidth/2 - ScreenHeight/2
                         finishBlock:^{
              if ([self.delegate respondsToSelector:@selector(KTVideoPlayerDidRotateToLandscape:)]) {
                  [self.delegate KTVideoPlayerDidRotateToLandscape:sender.selected];
@@ -166,7 +166,6 @@
                               frame:self.originFrame
                    trailingConstant:0
                      bottomConstant:0
-                   spinnerYposition:0
                         finishBlock:nil];
     }
 }
@@ -307,7 +306,6 @@
                                   frame:self.originFrame
                        trailingConstant:0
                          bottomConstant:0
-                       spinnerYposition:0
                             finishBlock:nil];
             break;
         }
@@ -317,7 +315,6 @@
                                   frame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)
                        trailingConstant:ScreenWidth - ScreenHeight
                          bottomConstant:-ScreenWidth + ScreenHeight
-                       spinnerYposition:ScreenWidth/2 - ScreenHeight/2
                             finishBlock:^{
                                 if ([self.delegate respondsToSelector:@selector(KTVideoPlayerDidRotateToLandscape:)]) {
                                     [self.delegate KTVideoPlayerDidRotateToLandscape:YES];
@@ -331,7 +328,6 @@
                                   frame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)
                        trailingConstant:ScreenWidth - ScreenHeight
                          bottomConstant:-ScreenWidth + ScreenHeight
-                       spinnerYposition:ScreenWidth/2 - ScreenHeight/2
                             finishBlock:^{
                                 if ([self.delegate respondsToSelector:@selector(KTVideoPlayerDidRotateToLandscape:)]) {
                                     [self.delegate KTVideoPlayerDidRotateToLandscape:YES];
