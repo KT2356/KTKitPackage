@@ -10,4 +10,7 @@
 
 @interface UIImage (Category)
 
+//裁剪图片
+- (UIImage *)clipImageWithRect:(CGRect)clipFrame;
+
 @end

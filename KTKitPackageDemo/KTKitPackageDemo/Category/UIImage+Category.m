@@ -10,4 +10,12 @@
 
 @implementation UIImage (Category)
 
+//裁剪图片
+- (UIImage *)clipImageWithRect:(CGRect)clipFrame {
+    CGImageRef refImage = CGImageCreateWithImageInRect(self.CGImage, clipFrame);
+    UIImage *newImage = [UIImage imageWithCGImage:refImage];
+    CGImageRelease(refImage);
+    return newImage;
+}
+
 @end
